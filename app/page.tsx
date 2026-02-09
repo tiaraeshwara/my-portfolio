@@ -8,6 +8,151 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// --- NEW CERTIFICATIONS COMPONENT ---
+const CertificationsSection = ({ isDarkMode }) => {
+  const certs = [
+    {
+      title: "Fundamentals of Machine Learning and Artificial Intelligence",
+      issuer: "Amazon Web Services (AWS)",
+      date: "Feb 2026",
+      id: "AWS-ML-AI-2026",
+      skills: ["AWS", "Machine Learning", "AI"],
+      icon: "☁️"
+    },
+    {
+      title: "HTML, CSS, and Javascript for Web Developers",
+      issuer: "Johns Hopkins University",
+      date: "Jan 2025",
+      id: "CHWODEBGUEYN",
+      skills: ["Web Development", "Frontend"],
+      icon: "🎓"
+    },
+    {
+      title: "Fundamentals of Generative AI",
+      issuer: "Microsoft",
+      date: "Nov 2024",
+      id: "MS-GEN-AI-01",
+      skills: ["Generative AI", "LLMs"],
+      icon: "🤖"
+    },
+    {
+      title: "Fundamentals of Facial Recognition",
+      issuer: "Microsoft",
+      date: "Nov 2024",
+      id: "MS-FR-02",
+      skills: ["Computer Vision", "Azure"],
+      icon: "👤"
+    },
+    {
+      title: "Fundamental AI Concepts",
+      issuer: "Microsoft",
+      date: "Nov 2024",
+      id: "MS-AI-03",
+      skills: ["AI Strategy", "Azure AI"],
+      icon: "🧠"
+    },
+    {
+      title: "Introduction to Microsoft 365 Copilot",
+      issuer: "Microsoft",
+      date: "Nov 2024",
+      id: "MS-365-CPLT",
+      skills: ["Productivity", "Copilot"],
+      icon: "🪄"
+    }
+  ];
+
+  return (
+    <section id="EXPERIENCE" className="relative z-10 py-32 max-w-7xl mx-auto px-6 overflow-hidden">
+      <div className="flex flex-col md:flex-row gap-12">
+        {/* Left Side: Title */}
+        <div className="md:w-1/3">
+          <div className="sticky top-32">
+            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-purple-500 mb-4 block">// LIVE_FEED</span>
+            <h2 className={`text-6xl md:text-7xl font-black leading-none tracking-tighter mb-6 ${isDarkMode ? "text-white" : "text-black"}`}>
+              VERIFIED <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">AUDIT LOG</span>
+            </h2>
+            <p className="text-gray-500 text-sm max-w-xs leading-relaxed mb-8">
+              Real-time verification of professional credentials and technical competencies.
+            </p>
+            <div className="flex items-center gap-2 text-[10px] font-bold text-green-500 uppercase tracking-widest">
+              <span>&gt; SYSTEM STATUS: ALL CHECKS PASSED</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side: Timeline of Certs */}
+        <div className="md:w-2/3 relative">
+          {/* Vertical Timeline Line */}
+          <div className={`absolute left-0 md:left-4 top-0 bottom-0 w-[1px] ${isDarkMode ? "bg-white/10" : "bg-black/10"}`} />
+          
+          <div className="space-y-12">
+            {certs.map((cert, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                className="relative pl-8 md:pl-16 group"
+              >
+                {/* Timeline Dot */}
+                <div className={`absolute left-[-4.5px] md:left-[11.5px] top-8 w-2.5 h-2.5 rounded-full border-2 transition-all duration-500 group-hover:scale-150 group-hover:bg-purple-500 ${
+                  isDarkMode ? "bg-black border-white/30" : "bg-white border-black/30"
+                }`} />
+
+                <div className={`p-8 rounded-2xl border transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] ${
+                  isDarkMode 
+                  ? "bg-white/[0.02] border-white/5 hover:bg-white/[0.04] hover:border-white/10" 
+                  : "bg-black/[0.02] border-black/5 hover:bg-black/[0.04] hover:border-black/10"
+                }`}>
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div className="flex items-center gap-4">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl ${isDarkMode ? "bg-white/5" : "bg-black/5"}`}>
+                        {cert.icon}
+                      </div>
+                      <div>
+                        <h3 className={`font-black text-lg md:text-xl leading-tight ${isDarkMode ? "text-white" : "text-black"}`}>
+                          {cert.title}
+                        </h3>
+                        <p className="text-purple-500 text-[10px] font-bold uppercase tracking-widest mt-1">ISSUED BY {cert.issuer}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={`h-[1px] w-full mb-6 ${isDarkMode ? "bg-white/5" : "bg-black/5"}`} />
+
+                  <div className="flex flex-wrap items-center justify-between gap-6">
+                    <div className="flex gap-10">
+                      <div>
+                        <p className="text-gray-500 text-[8px] uppercase font-bold tracking-[0.2em] mb-1">DATE</p>
+                        <p className={`text-[10px] font-black ${isDarkMode ? "text-white" : "text-black"}`}>{cert.date}</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500 text-[8px] uppercase font-bold tracking-[0.2em] mb-1">ID</p>
+                        <p className={`text-[10px] font-mono ${isDarkMode ? "text-white/60" : "text-black/60"}`}>{cert.id}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      {cert.skills.map(skill => (
+                        <span key={skill} className={`px-3 py-1 rounded-md text-[8px] font-black uppercase tracking-widest border ${
+                          isDarkMode ? "border-white/10 text-gray-400" : "border-black/10 text-gray-600"
+                        }`}>
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- NAVBAR COMPONENT ---
 const Navbar = ({ isDarkMode, toggleTheme }) => {
   const navLinks = [
@@ -59,13 +204,11 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
               >
                 Engineer
               </motion.span>
-              {/* Elegant Logo Underline */}
               <div className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-purple-500 to-transparent group-hover:w-full transition-all duration-500" />
             </div>
           </a>
         </motion.div>
 
-        {/* STAGGERED NAV LINKS WITH HOVER UNDERLINE */}
         <div className="flex flex-1 items-center justify-end mr-4 gap-10">
           {navLinks.map((link, idx) => (
             <motion.a
@@ -80,13 +223,11 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
               }`}
             >
               {link.name}
-              {/* --- NAV HOVER UNDERLINE --- */}
               <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-purple-500 transition-all duration-300 ease-out group-hover:w-full" />
             </motion.a>
           ))}
         </div>
 
-        {/* BUTTONS */}
         <div className="flex items-center gap-2">
           <motion.button 
             initial={{ opacity: 0, rotate: -180 }}
@@ -219,8 +360,8 @@ export default function PortfolioPage() {
       },
     });
 
-    const items = gsap.utils.toArray<HTMLElement>(".process-item");
-    items.forEach((item: HTMLElement) => {
+    const items = gsap.utils.toArray(".process-item");
+    items.forEach((item) => {
       gsap.fromTo(item, { opacity: 0, y: 50 }, {
         opacity: 1, y: 0, duration: 1,
         scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none reverse" },
@@ -401,6 +542,9 @@ export default function PortfolioPage() {
 
       <LanguageFluency isDarkMode={isDarkMode} />
 
+      {/* CERTIFICATIONS SECTION */}
+      <CertificationsSection isDarkMode={isDarkMode} />
+
       {/* CONTACT SECTION */}
       <section id="CONTACTS" className={`relative z-10 py-32 max-w-7xl mx-auto px-6 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}>
         <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.5em] mb-16">CONTACT</h3>
@@ -427,7 +571,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* EXPERIENCE SECTION */}
-      <section id="EXPERIENCE" className={`relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 pb-32 pt-20 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}>
+      <section id="EXPERIENCE_CARDS" className={`relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 pb-32 pt-20 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}>
         <div className={`border p-8 rounded-3xl transition-colors ${isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"}`}>
           <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-10">History</h3>
           <p className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}>Lead Designer</p>
