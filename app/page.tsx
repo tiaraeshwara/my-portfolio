@@ -17,7 +17,7 @@ const CertificationsSection = ({ isDarkMode }) => {
       date: "Feb 2026",
       id: "AWS-ML-AI-2026",
       skills: ["AWS", "Machine Learning", "AI"],
-      icon: "☁️"
+      icon: "☁️",
     },
     {
       title: "HTML, CSS, and Javascript for Web Developers",
@@ -25,7 +25,7 @@ const CertificationsSection = ({ isDarkMode }) => {
       date: "Jan 2025",
       id: "CHWODEBGUEYN",
       skills: ["Web Development", "Frontend"],
-      icon: "🎓"
+      icon: "🎓",
     },
     {
       title: "Fundamentals of Generative AI",
@@ -33,7 +33,7 @@ const CertificationsSection = ({ isDarkMode }) => {
       date: "Nov 2024",
       id: "MS-GEN-AI-01",
       skills: ["Generative AI", "LLMs"],
-      icon: "🤖"
+      icon: "🤖",
     },
     {
       title: "Fundamentals of Facial Recognition",
@@ -41,7 +41,7 @@ const CertificationsSection = ({ isDarkMode }) => {
       date: "Nov 2024",
       id: "MS-FR-02",
       skills: ["Computer Vision", "Azure"],
-      icon: "👤"
+      icon: "👤",
     },
     {
       title: "Fundamental AI Concepts",
@@ -49,7 +49,7 @@ const CertificationsSection = ({ isDarkMode }) => {
       date: "Nov 2024",
       id: "MS-AI-03",
       skills: ["AI Strategy", "Azure AI"],
-      icon: "🧠"
+      icon: "🧠",
     },
     {
       title: "Introduction to Microsoft 365 Copilot",
@@ -57,23 +57,33 @@ const CertificationsSection = ({ isDarkMode }) => {
       date: "Nov 2024",
       id: "MS-365-CPLT",
       skills: ["Productivity", "Copilot"],
-      icon: "🪄"
-    }
+      icon: "🪄",
+    },
   ];
 
   return (
-    <section id="EXPERIENCE" className="relative z-10 py-32 max-w-7xl mx-auto px-6 overflow-hidden">
+    <section
+      id="EXPERIENCE"
+      className="relative z-10 py-32 max-w-7xl mx-auto px-6 overflow-hidden"
+    >
       <div className="flex flex-col md:flex-row gap-12">
         {/* Left Side: Title */}
         <div className="md:w-1/3">
           <div className="sticky top-32">
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-purple-500 mb-4 block">// LIVE_FEED</span>
-            <h2 className={`text-6xl md:text-7xl font-black leading-none tracking-tighter mb-6 ${isDarkMode ? "text-white" : "text-black"}`}>
+            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-purple-500 mb-4 block">
+              // LIVE_FEED
+            </span>
+            <h2
+              className={`text-6xl md:text-7xl font-black leading-none tracking-tighter mb-6 ${isDarkMode ? "text-white" : "text-black"}`}
+            >
               VERIFIED <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">AUDIT LOG</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                AUDIT LOG
+              </span>
             </h2>
             <p className="text-gray-500 text-sm max-w-xs leading-relaxed mb-8">
-              Real-time verification of professional credentials and technical competencies.
+              Real-time verification of professional credentials and technical
+              competencies.
             </p>
             <div className="flex items-center gap-2 text-[10px] font-bold text-green-500 uppercase tracking-widest">
               <span>&gt; SYSTEM STATUS: ALL CHECKS PASSED</span>
@@ -84,11 +94,13 @@ const CertificationsSection = ({ isDarkMode }) => {
         {/* Right Side: Timeline of Certs */}
         <div className="md:w-2/3 relative">
           {/* Vertical Timeline Line */}
-          <div className={`absolute left-0 md:left-4 top-0 bottom-0 w-[1px] ${isDarkMode ? "bg-white/10" : "bg-black/10"}`} />
-          
+          <div
+            className={`absolute left-0 md:left-4 top-0 bottom-0 w-[1px] ${isDarkMode ? "bg-white/10" : "bg-black/10"}`}
+          />
+
           <div className="space-y-12">
             {certs.map((cert, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -96,48 +108,79 @@ const CertificationsSection = ({ isDarkMode }) => {
                 className="relative pl-8 md:pl-16 group"
               >
                 {/* Timeline Dot */}
-                <div className={`absolute left-[-4.5px] md:left-[11.5px] top-8 w-2.5 h-2.5 rounded-full border-2 transition-all duration-500 group-hover:scale-150 group-hover:bg-purple-500 ${
-                  isDarkMode ? "bg-black border-white/30" : "bg-white border-black/30"
-                }`} />
+                <div
+                  className={`absolute left-[-4.5px] md:left-[11.5px] top-8 w-2.5 h-2.5 rounded-full border-2 transition-all duration-500 group-hover:scale-150 group-hover:bg-purple-500 ${
+                    isDarkMode
+                      ? "bg-black border-white/30"
+                      : "bg-white border-black/30"
+                  }`}
+                />
 
-                <div className={`p-8 rounded-2xl border transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] ${
-                  isDarkMode 
-                  ? "bg-white/[0.02] border-white/5 hover:bg-white/[0.04] hover:border-white/10" 
-                  : "bg-black/[0.02] border-black/5 hover:bg-black/[0.04] hover:border-black/10"
-                }`}>
+                <div
+                  className={`p-8 rounded-2xl border transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] ${
+                    isDarkMode
+                      ? "bg-white/[0.02] border-white/5 hover:bg-white/[0.04] hover:border-white/10"
+                      : "bg-black/[0.02] border-black/5 hover:bg-black/[0.04] hover:border-black/10"
+                  }`}
+                >
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                     <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl ${isDarkMode ? "bg-white/5" : "bg-black/5"}`}>
+                      <div
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl ${isDarkMode ? "bg-white/5" : "bg-black/5"}`}
+                      >
                         {cert.icon}
                       </div>
                       <div>
-                        <h3 className={`font-black text-lg md:text-xl leading-tight ${isDarkMode ? "text-white" : "text-black"}`}>
+                        <h3
+                          className={`font-black text-lg md:text-xl leading-tight ${isDarkMode ? "text-white" : "text-black"}`}
+                        >
                           {cert.title}
                         </h3>
-                        <p className="text-purple-500 text-[10px] font-bold uppercase tracking-widest mt-1">ISSUED BY {cert.issuer}</p>
+                        <p className="text-purple-500 text-[10px] font-bold uppercase tracking-widest mt-1">
+                          ISSUED BY {cert.issuer}
+                        </p>
                       </div>
                     </div>
                   </div>
 
-                  <div className={`h-[1px] w-full mb-6 ${isDarkMode ? "bg-white/5" : "bg-black/5"}`} />
+                  <div
+                    className={`h-[1px] w-full mb-6 ${isDarkMode ? "bg-white/5" : "bg-black/5"}`}
+                  />
 
                   <div className="flex flex-wrap items-center justify-between gap-6">
                     <div className="flex gap-10">
                       <div>
-                        <p className="text-gray-500 text-[8px] uppercase font-bold tracking-[0.2em] mb-1">DATE</p>
-                        <p className={`text-[10px] font-black ${isDarkMode ? "text-white" : "text-black"}`}>{cert.date}</p>
+                        <p className="text-gray-500 text-[8px] uppercase font-bold tracking-[0.2em] mb-1">
+                          DATE
+                        </p>
+                        <p
+                          className={`text-[10px] font-black ${isDarkMode ? "text-white" : "text-black"}`}
+                        >
+                          {cert.date}
+                        </p>
                       </div>
                       <div>
-                        <p className="text-gray-500 text-[8px] uppercase font-bold tracking-[0.2em] mb-1">ID</p>
-                        <p className={`text-[10px] font-mono ${isDarkMode ? "text-white/60" : "text-black/60"}`}>{cert.id}</p>
+                        <p className="text-gray-500 text-[8px] uppercase font-bold tracking-[0.2em] mb-1">
+                          ID
+                        </p>
+                        <p
+                          className={`text-[10px] font-mono ${isDarkMode ? "text-white/60" : "text-black/60"}`}
+                        >
+                          {cert.id}
+                        </p>
                       </div>
                     </div>
-                    
+
                     <div className="flex gap-2">
-                      {cert.skills.map(skill => (
-                        <span key={skill} className={`px-3 py-1 rounded-md text-[8px] font-black uppercase tracking-widest border ${
-                          isDarkMode ? "border-white/10 text-gray-400" : "border-black/10 text-gray-600"
-                        }`}>
+                      {cert.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className={`px-3 py-1 rounded-md text-[8px] font-black uppercase tracking-widest border ${
+                            isDarkMode
+                              ? "border-white/10 text-gray-400"
+                              : "border-black/10 text-gray-600"
+                          }`}
+                        >
                           {skill}
                         </span>
                       ))}
@@ -156,7 +199,7 @@ const CertificationsSection = ({ isDarkMode }) => {
 // --- NAVBAR COMPONENT ---
 const Navbar = ({ isDarkMode, toggleTheme }) => {
   const navLinks = [
-    { name: "DEVELOPMENTS", href: "#DEVELOPMENTS" }, 
+    { name: "DEVELOPMENTS", href: "#DEVELOPMENTS" },
     { name: "SKILLS", href: "#SKILLS" },
     { name: "CONTACTS", href: "#CONTACTS" },
     { name: "EXPERIENCE", href: "#EXPERIENCE" },
@@ -164,41 +207,54 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
 
   return (
     <nav className="fixed top-5 left-0 w-full z-[100] px-7">
-      <motion.div 
+      <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         className={`max-w-12xl mx-auto flex items-center justify-between backdrop-blur-xl border px-8 py-1 rounded-full shadow-2xl transition-all duration-500 ${
-          isDarkMode ? "bg-black/40 border-white/10" : "bg-white/40 border-black/10"
+          isDarkMode
+            ? "bg-black/40 border-white/10"
+            : "bg-white/40 border-black/10"
         }`}
       >
-        
         {/* BRAND SECTION */}
         <motion.div
           initial={{ opacity: 0, x: -30, filter: "blur(8px)" }}
           animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1, delay: 0.3, type: "spring", stiffness: 100 }}
+          transition={{
+            duration: 1,
+            delay: 0.3,
+            type: "spring",
+            stiffness: 100,
+          }}
         >
-          <a href="#top" className="flex items-center gap-4 group cursor-pointer relative">
+          <a
+            href="#top"
+            className="flex items-center gap-4 group cursor-pointer relative"
+          >
             <div className="absolute inset-0 bg-purple-500/10 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
+
             <div className="relative w-9 h-9 rounded-full bg-gradient-to-tr from-purple-600 via-pink-500 to-blue-500 p-[1.5px] group-hover:rotate-[360deg] transition-transform duration-1000 ease-in-out">
-              <div className={`w-full h-full rounded-full flex items-center justify-center overflow-hidden font-bold text-xs ${
-                isDarkMode ? "bg-black text-white" : "bg-white text-black"
-              }`}>
+              <div
+                className={`w-full h-full rounded-full flex items-center justify-center overflow-hidden font-bold text-xs ${
+                  isDarkMode ? "bg-black text-white" : "bg-white text-black"
+                }`}
+              >
                 T
               </div>
             </div>
 
             <div className="flex flex-col relative">
-              <span className={`font-black tracking-tighter leading-none transition-all duration-500 ${
-                isDarkMode 
-                  ? "text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-500" 
-                  : "text-black group-hover:text-purple-600"
-              }`}>
+              <span
+                className={`font-black tracking-tighter leading-none transition-all duration-500 ${
+                  isDarkMode
+                    ? "text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-500"
+                    : "text-black group-hover:text-purple-600"
+                }`}
+              >
                 T I A R A
               </span>
-              <motion.span 
+              <motion.span
                 whileHover={{ letterSpacing: "0.25em" }}
                 className="text-[8px] text-gray-500 uppercase tracking-widest font-black transition-all duration-300"
               >
@@ -216,10 +272,16 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
               href={link.href}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 + (idx * 0.1), ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.5 + idx * 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               whileHover={{ y: -2 }}
               className={`relative py-1 text-[10px] font-black uppercase tracking-widest transition-all group ${
-                isDarkMode ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-black"
+                isDarkMode
+                  ? "text-gray-400 hover:text-white"
+                  : "text-gray-600 hover:text-black"
               }`}
             >
               {link.name}
@@ -229,32 +291,39 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         </div>
 
         <div className="flex items-center gap-2">
-          <motion.button 
+          <motion.button
             initial={{ opacity: 0, rotate: -180 }}
             animate={{ opacity: 1, rotate: 0 }}
             transition={{ delay: 0.9, type: "spring", stiffness: 200 }}
             onClick={toggleTheme}
             className={`p-1.5 rounded-full border transition-all duration-300 ${
-              isDarkMode ? "border-white/10 hover:bg-white/10 text-white" : "border-black/10 hover:bg-black/10 text-black"
+              isDarkMode
+                ? "border-white/10 hover:bg-white/10 text-white"
+                : "border-black/10 hover:bg-black/10 text-black"
             }`}
           >
-            {isDarkMode ? "🔆" : "🌙"} 
+            {isDarkMode ? "🔆" : "🌙"}
           </motion.button>
-          
-          <motion.button 
+
+          <motion.button
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1 }}
-            whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.4)" }}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.4)",
+            }}
             whileTap={{ scale: 0.95 }}
             className={`px-6 py-2 rounded-full text-[10px] font-black transition-all uppercase tracking-tight ${
-              isDarkMode ? "bg-white text-black hover:bg-purple-500 hover:text-white" : "bg-black text-white"
+              isDarkMode
+                ? "bg-white text-black hover:bg-purple-500 hover:text-white"
+                : "bg-black text-white"
             }`}
           >
             Let&apos;s Talk
           </motion.button>
         </div>
-      </motion.div> 
+      </motion.div>
     </nav>
   );
 };
@@ -272,7 +341,10 @@ const LanguageFluency = ({ isDarkMode }) => {
   return (
     <section className="relative z-10 max-w-5xl mx-auto px-6 py-24 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
       <div className="relative w-72 h-72 flex items-center justify-center">
-        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
+        <svg
+          className="w-full h-full transform -rotate-90"
+          viewBox="0 0 200 200"
+        >
           {languages.map((lang, i) => {
             const circumference = 2 * Math.PI * lang.radius;
             const offset = circumference - (lang.value / 100) * circumference;
@@ -284,13 +356,21 @@ const LanguageFluency = ({ isDarkMode }) => {
                 className="cursor-pointer"
               >
                 <circle
-                  cx="100" cy="100" r={lang.radius}
-                  stroke="currentColor" strokeWidth="10" fill="transparent"
+                  cx="100"
+                  cy="100"
+                  r={lang.radius}
+                  stroke="currentColor"
+                  strokeWidth="10"
+                  fill="transparent"
                   className={isDarkMode ? "text-white/5" : "text-black/5"}
                 />
                 <motion.circle
-                  cx="100" cy="100" r={lang.radius}
-                  stroke={lang.color} strokeWidth="10" fill="transparent"
+                  cx="100"
+                  cy="100"
+                  r={lang.radius}
+                  stroke={lang.color}
+                  strokeWidth="10"
+                  fill="transparent"
                   strokeDasharray={circumference}
                   initial={{ strokeDashoffset: circumference }}
                   whileInView={{ strokeDashoffset: offset }}
@@ -323,16 +403,23 @@ const LanguageFluency = ({ isDarkMode }) => {
 
       <div className="flex flex-col gap-6">
         {languages.map((lang) => (
-          <div 
-            key={lang.name} 
-            className={`flex items-center gap-4 transition-opacity duration-300 ${hovered && hovered.name !== lang.name ? 'opacity-30' : 'opacity-100'}`}
+          <div
+            key={lang.name}
+            className={`flex items-center gap-4 transition-opacity duration-300 ${hovered && hovered.name !== lang.name ? "opacity-30" : "opacity-100"}`}
           >
-            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: lang.color }} />
+            <div
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: lang.color }}
+            />
             <div>
-              <p className={`font-black text-sm uppercase tracking-tighter transition-colors ${isDarkMode ? "text-white" : "text-black"}`}>
+              <p
+                className={`font-black text-sm uppercase tracking-tighter transition-colors ${isDarkMode ? "text-white" : "text-black"}`}
+              >
                 {lang.name}
               </p>
-              <p className="text-gray-500 text-[10px] font-mono">{lang.value}% Proficiency</p>
+              <p className="text-gray-500 text-[10px] font-mono">
+                {lang.value}% Proficiency
+              </p>
             </div>
           </div>
         ))}
@@ -350,50 +437,94 @@ export default function PortfolioPage() {
 
   useEffect(() => {
     gsap.to(purpleGlowRef.current, {
-      duration: 10, x: 100, y: 50, scale: 1.2, repeat: -1, yoyo: true, ease: "sine.inOut",
+      duration: 10,
+      x: 100,
+      y: 50,
+      scale: 1.2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
     });
 
-    gsap.fromTo(lineRef.current, { height: 0 }, {
-      height: "100%", ease: "none",
-      scrollTrigger: {
-        trigger: ".process-container", start: "top center", end: "bottom center", scrub: true,
+    gsap.fromTo(
+      lineRef.current,
+      { height: 0 },
+      {
+        height: "100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".process-container",
+          start: "top center",
+          end: "bottom center",
+          scrub: true,
+        },
       },
-    });
+    );
 
     const items = gsap.utils.toArray(".process-item");
     items.forEach((item) => {
-      gsap.fromTo(item, { opacity: 0, y: 50 }, {
-        opacity: 1, y: 0, duration: 1,
-        scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none reverse" },
-      });
+      gsap.fromTo(
+        item,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
     });
   }, []);
 
   const steps = [
-    { id: "1", title: "Strategy & Code", desc: "Crafting the logic and architecture behind high-performance digital systems." },
-    { id: "2", title: "Creative Building", desc: "Turning complex requirements into refined, human-centric interfaces." },
-    { id: "3", title: "Continuous Innovation", desc: "Iterating and evolving systems to stay ahead of technical debt." },
+    {
+      id: "1",
+      title: "Strategy & Code",
+      desc: "Crafting the logic and architecture behind high-performance digital systems.",
+    },
+    {
+      id: "2",
+      title: "Creative Building",
+      desc: "Turning complex requirements into refined, human-centric interfaces.",
+    },
+    {
+      id: "3",
+      title: "Continuous Innovation",
+      desc: "Iterating and evolving systems to stay ahead of technical debt.",
+    },
   ];
 
   const skills = [
-    { name: "HTML5", level: 95 }, { name: "React", level: 90 }, { name: "CSS", level: 95 },
-    { name: "JavaScript", level: 85 }, { name: "Tailwind CSS", level: 80 },
-    { name: "Bootstrap5", level: 80 }, { name: "TypeScript", level: 70 }, { name: "Xaml (Xamarin)", level: 70 },
+    { name: "HTML5", level: 95 },
+    { name: "React", level: 90 },
+    { name: "CSS", level: 95 },
+    { name: "JavaScript", level: 85 },
+    { name: "Tailwind CSS", level: 80 },
+    { name: "Bootstrap5", level: 80 },
+    { name: "TypeScript", level: 70 },
+    { name: "Xaml (Xamarin)", level: 70 },
   ];
 
   return (
-    <motion.main 
-      id="top" 
+    <motion.main
+      id="top"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
       className={`relative min-h-screen font-sans overflow-x-hidden transition-colors duration-700 ${
-        isDarkMode ? "bg-[#050505] text-white selection:bg-purple-500/30" : "bg-[#f8f8f8] text-black selection:bg-purple-200"
+        isDarkMode
+          ? "bg-[#050505] text-white selection:bg-purple-500/30"
+          : "bg-[#f8f8f8] text-black selection:bg-purple-200"
       }`}
     >
-      
       <style jsx global>{`
-        html { scroll-behavior: smooth; }
+        html {
+          scroll-behavior: smooth;
+        }
       `}</style>
 
       <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
@@ -405,7 +536,9 @@ export default function PortfolioPage() {
           className={`absolute -top-[10%] -right-[5%] w-[70vw] h-[70vw] rounded-full blur-[120px] transition-opacity duration-1000 ${
             isDarkMode ? "opacity-30" : "opacity-10"
           }`}
-          style={{ background: "radial-gradient(circle, #7000ff 0%, transparent 70%)" }}
+          style={{
+            background: "radial-gradient(circle, #7000ff 0%, transparent 70%)",
+          }}
         />
       </div>
 
@@ -426,14 +559,25 @@ export default function PortfolioPage() {
             </span>
           </motion.h1>
           <div className="max-w-md mt-6">
-            <h2 className={`text-2xl font-bold uppercase tracking-tight mb-3 transition-colors ${isDarkMode ? "text-white" : "text-black"}`}>
-              Hi, I&apos;m <span className="text-purple-300 relative inline-block">
+            <h2
+              className={`text-2xl font-bold uppercase tracking-tight mb-3 transition-colors ${isDarkMode ? "text-white" : "text-black"}`}
+            >
+              Hi, I&apos;m{" "}
+              <span className="text-purple-300 relative inline-block">
                 TIARA ESHWARA
                 <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-blue-500" />
               </span>
             </h2>
-            <p className={`text-sm md:text-base transition-colors leading-relaxed ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
-                Driven by a passion for building seamless, end-to-end digital experiences, I pair a rigorous engineering mindset with a diverse toolkit spanning Web, Mobile, and Data Science. I am eager to transition my technical foundation into a professional environment—applying my drive for excellence to real-world software challenges and high-velocity engineering teams. </p>
+            <p
+              className={`text-sm md:text-base transition-colors leading-relaxed ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}
+            >
+              Driven by a passion for building seamless, end-to-end digital
+              experiences, I pair a rigorous engineering mindset with a diverse
+              toolkit spanning Web, Mobile, and Data Science. I am eager to
+              transition my technical foundation into a professional
+              environment—applying my drive for excellence to real-world
+              software challenges and high-velocity engineering teams.{" "}
+            </p>
           </div>
         </div>
 
@@ -449,8 +593,10 @@ export default function PortfolioPage() {
               alt="Tiara"
               className={`w-full h-auto object-contain transition-all duration-1000 ${isDarkMode ? "grayscale hover:grayscale-0" : "grayscale-0"}`}
               style={{
-                maskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to bottom, black 90%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 90%, transparent 100%)",
               }}
             />
           </motion.div>
@@ -458,17 +604,27 @@ export default function PortfolioPage() {
       </section>
 
       {/* PILL CATEGORIES */}
-      <section id="DEVELOPMENTS" className="relative z-10 max-w-7xl mx-auto px-6 md:px-24 py-8 flex flex-wrap gap-4">
-        {["Front-end", "Back-end", "Web Development", "Software Development"].map((cat, idx) => (
+      <section
+        id="DEVELOPMENTS"
+        className="relative z-10 max-w-7xl mx-auto px-6 md:px-24 py-8 flex flex-wrap gap-4"
+      >
+        {[
+          "Front-end",
+          "Back-end",
+          "Web Development",
+          "Software Development",
+        ].map((cat, idx) => (
           <motion.div
             key={cat}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * idx }}
             className={`px-8 py-3 rounded-full border text-[11px] font-black tracking-widest uppercase transition-all duration-500 cursor-default ${
-              idx === 0 
-              ? "bg-gradient-to-r from-[#c026d3] to-[#8b5cf6] text-white border-transparent shadow-[0_10px_30px_rgba(192,38,211,0.4)] scale-105" 
-              : isDarkMode ? "bg-white/5 border-white/10 text-gray-500 hover:text-white" : "bg-black/5 border-black/10 text-gray-600 hover:text-black"
+              idx === 0
+                ? "bg-gradient-to-r from-[#c026d3] to-[#8b5cf6] text-white border-transparent shadow-[0_10px_30px_rgba(192,38,211,0.4)] scale-105"
+                : isDarkMode
+                  ? "bg-white/5 border-white/10 text-gray-500 hover:text-white"
+                  : "bg-black/5 border-black/10 text-gray-600 hover:text-black"
             }`}
           >
             {cat}
@@ -479,34 +635,66 @@ export default function PortfolioPage() {
       {/* WORKFLOW SECTION */}
       <section className="relative z-10 py-32 max-w-6xl mx-auto px-6 process-container">
         <div className="text-center mb-24">
-          <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-500 mb-4">My Workflow</p>
-          <h2 className={`text-4xl md:text-6xl font-black tracking-tighter transition-colors ${isDarkMode ? "text-white" : "text-black"}`}>
+          <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-500 mb-4">
+            My Workflow
+          </p>
+          <h2
+            className={`text-4xl md:text-6xl font-black tracking-tighter transition-colors ${isDarkMode ? "text-white" : "text-black"}`}
+          >
             Engineering with Precision
           </h2>
         </div>
         <div className="relative">
-          <div className={`absolute left-1/2 top-0 bottom-0 w-[1px] -translate-x-1/2 hidden md:block ${isDarkMode ? "bg-white/10" : "bg-black/10"}`} />
-          <div ref={lineRef} className="absolute left-1/2 top-0 w-[2px] bg-gradient-to-b from-purple-500 to-pink-500 -translate-x-1/2 hidden md:block z-0" />
+          <div
+            className={`absolute left-1/2 top-0 bottom-0 w-[1px] -translate-x-1/2 hidden md:block ${isDarkMode ? "bg-white/10" : "bg-black/10"}`}
+          />
+          <div
+            ref={lineRef}
+            className="absolute left-1/2 top-0 w-[2px] bg-gradient-to-b from-purple-500 to-pink-500 -translate-x-1/2 hidden md:block z-0"
+          />
           {steps.map((step, index) => (
-            <div key={step.id} className={`process-item relative flex flex-col md:flex-row items-center mb-40 ${index % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
+            <div
+              key={step.id}
+              className={`process-item relative flex flex-col md:flex-row items-center mb-40 ${index % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
+            >
               <div className="w-full md:w-1/2 px-10 text-center md:text-left">
-                <div className={index % 2 !== 0 ? "md:text-right" : "md:text-left"}>
-                  <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? "text-white" : "text-black"}`}>{step.title}</h3>
-                  <p className="text-gray-500 text-sm max-w-sm mx-auto md:mx-0 inline-block">{step.desc}</p>
+                <div
+                  className={index % 2 !== 0 ? "md:text-right" : "md:text-left"}
+                >
+                  <h3
+                    className={`text-2xl font-bold mb-4 ${isDarkMode ? "text-white" : "text-black"}`}
+                  >
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm max-w-sm mx-auto md:mx-0 inline-block">
+                    {step.desc}
+                  </p>
                 </div>
               </div>
-              <div className={`absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border shadow-[0_0_15px_rgba(168,85,247,0.4)] flex items-center justify-center z-10 transition-colors ${
-                isDarkMode ? "bg-[#050505] border-white/20" : "bg-white border-black/20"
-              }`}>
+              <div
+                className={`absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border shadow-[0_0_15px_rgba(168,85,247,0.4)] flex items-center justify-center z-10 transition-colors ${
+                  isDarkMode
+                    ? "bg-[#050505] border-white/20"
+                    : "bg-white border-black/20"
+                }`}
+              >
                 <span className="text-purple-400 font-black">{step.id}</span>
               </div>
               <div className="w-full md:w-1/2 px-10 mt-10 md:mt-0">
-                <div className={`aspect-video rounded-3xl border backdrop-blur-sm p-4 hover:border-purple-500/30 transition-colors ${
-                  isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"
-                }`}>
-                  <div className={`w-full h-full rounded-xl border flex items-center justify-center italic text-gray-500 ${
-                    isDarkMode ? "bg-black/40 border-white/5" : "bg-white/40 border-black/5"
-                  }`}>
+                <div
+                  className={`aspect-video rounded-3xl border backdrop-blur-sm p-4 hover:border-purple-500/30 transition-colors ${
+                    isDarkMode
+                      ? "bg-white/[0.03] border-white/5"
+                      : "bg-black/[0.03] border-black/5"
+                  }`}
+                >
+                  <div
+                    className={`w-full h-full rounded-xl border flex items-center justify-center italic text-gray-500 ${
+                      isDarkMode
+                        ? "bg-black/40 border-white/5"
+                        : "bg-white/40 border-black/5"
+                    }`}
+                  >
                     Project Visual {step.id}
                   </div>
                 </div>
@@ -517,16 +705,29 @@ export default function PortfolioPage() {
       </section>
 
       {/* SKILLS SECTION */}
-      <section id="SKILLS" className="relative z-10 py-24 max-w-4xl mx-auto px-6">
-        <h2 className="text-center text-purple-400 text-[10px] font-black uppercase tracking-[0.5em] mb-20">Technical Skills</h2>
+      <section
+        id="SKILLS"
+        className="relative z-10 py-24 max-w-4xl mx-auto px-6"
+      >
+        <h2 className="text-center text-purple-400 text-[10px] font-black uppercase tracking-[0.5em] mb-20">
+          Technical Skills
+        </h2>
         <div className="space-y-10">
           {skills.map((skill, index) => (
             <div key={index}>
               <div className="flex justify-between items-center mb-3">
-                <span className={`text-xs font-black uppercase tracking-widest ${isDarkMode ? "text-white" : "text-black"}`}>{skill.name}</span>
-                <span className="text-purple-400 text-[10px] font-mono">{skill.level}%</span>
+                <span
+                  className={`text-xs font-black uppercase tracking-widest ${isDarkMode ? "text-white" : "text-black"}`}
+                >
+                  {skill.name}
+                </span>
+                <span className="text-purple-400 text-[10px] font-mono">
+                  {skill.level}%
+                </span>
               </div>
-              <div className={`h-[6px] w-full rounded-full overflow-hidden ${isDarkMode ? "bg-white/5" : "bg-black/5"}`}>
+              <div
+                className={`h-[6px] w-full rounded-full overflow-hidden ${isDarkMode ? "bg-white/5" : "bg-black/5"}`}
+              >
                 <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: `${skill.level}%` }}
@@ -546,23 +747,35 @@ export default function PortfolioPage() {
       <CertificationsSection isDarkMode={isDarkMode} />
 
       {/* CONTACT SECTION */}
-      <section id="CONTACTS" className={`relative z-10 py-32 max-w-7xl mx-auto px-6 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}>
-        <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.5em] mb-16">CONTACT</h3>
+      <section
+        id="CONTACTS"
+        className={`relative z-10 py-32 max-w-7xl mx-auto px-6 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
+      >
+        <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.5em] mb-16">
+          CONTACT
+        </h3>
         <div className="space-y-12">
           {[
-            { name: "LINKEDIN", href: "https://www.linkedin.com/in/tiara-eshwara-070b782a7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" },
+            {
+              name: "LINKEDIN",
+              href: "https://www.linkedin.com/in/tiara-eshwara-070b782a7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+            },
             { name: "GITHUB", href: "https://github.com/tiaraeshwara" },
-            { name: "EMAIL", href: "mailto:tiaraeshwara320@gmail.com" }
+            { name: "EMAIL", href: "mailto:tiaraeshwara320@gmail.com" },
           ].map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              target={link.name !== "EMAIL" ? "_blank" : "_self"} 
+            <a
+              key={link.name}
+              href={link.href}
+              target={link.name !== "EMAIL" ? "_blank" : "_self"}
               rel="noopener noreferrer"
               className="flex items-center gap-8 group transition-all w-fit"
             >
-              <span className={`w-8 h-[1px] group-hover:w-16 group-hover:bg-purple-500 transition-all duration-500 ${isDarkMode ? "bg-white/20" : "bg-black/20"}`} />
-              <span className={`text-4xl md:text-7xl font-black tracking-tighter group-hover:text-purple-400 transition-colors ${isDarkMode ? "text-white" : "text-black"}`}>
+              <span
+                className={`w-8 h-[1px] group-hover:w-16 group-hover:bg-purple-500 transition-all duration-500 ${isDarkMode ? "bg-white/20" : "bg-black/20"}`}
+              />
+              <span
+                className={`text-4xl md:text-7xl font-black tracking-tighter group-hover:text-purple-400 transition-colors ${isDarkMode ? "text-white" : "text-black"}`}
+              >
                 {link.name}
               </span>
             </a>
@@ -571,22 +784,48 @@ export default function PortfolioPage() {
       </section>
 
       {/* EXPERIENCE SECTION */}
-      <section id="EXPERIENCE_CARDS" className={`relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 pb-32 pt-20 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}>
-        <div className={`border p-8 rounded-3xl transition-colors ${isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"}`}>
-          <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-10">History</h3>
-          <p className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}>Lead Designer</p>
+      <section
+        id="EXPERIENCE_CARDS"
+        className={`relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 pb-32 pt-20 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
+      >
+        <div
+          className={`border p-8 rounded-3xl transition-colors ${isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"}`}
+        >
+          <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-10">
+            History
+          </h3>
+          <p
+            className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}
+          >
+            Lead Designer
+          </p>
           <p className="text-gray-500 text-xs italic mb-4">2023 - Present</p>
-          <p className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}>UI/UX Intern</p>
+          <p
+            className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}
+          >
+            UI/UX Intern
+          </p>
           <p className="text-gray-500 text-xs italic">2022 - 2023</p>
         </div>
-        <div className={`border p-8 rounded-3xl transition-colors ${isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"}`}>
-          <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-10">Education</h3>
-          <p className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}>BSc Software Engineering</p>
+        <div
+          className={`border p-8 rounded-3xl transition-colors ${isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"}`}
+        >
+          <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-10">
+            Education
+          </h3>
+          <p
+            className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}
+          >
+            BSc Software Engineering
+          </p>
           <p className="text-gray-500 text-xs">NSBM Green University</p>
         </div>
-        <div className={`border p-8 rounded-3xl flex items-end transition-colors ${isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"}`}>
+        <div
+          className={`border p-8 rounded-3xl flex items-end transition-colors ${isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"}`}
+        >
           <p className="text-gray-500 text-[10px] uppercase tracking-widest leading-relaxed">
-            Engineering refined digital systems with a focus on logic and human intuition.
+            Engineering refined digital systems with a focus on logic and human
+            intuition.
           </p>
         </div>
       </section>
