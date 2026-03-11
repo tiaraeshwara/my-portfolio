@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Tiara Eshwara | Portfolio",
-  description: "Welcome to the personal portfolio of Tiara Eshwara, a passionate software developer specializing in web development and design. Explore my projects, skills, and experience in creating innovative and user-friendly applications.",
+  description:
+    "Welcome to the personal portfolio of Tiara Eshwara, a passionate software developer specializing in web development and design. Explore my projects, skills, and experience in creating innovative and user-friendly applications.",
 };
 
 export default function RootLayout({
@@ -28,9 +29,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-
-        // Change this line:
-</body>
+      </body>
     </html>
   );
 }
