@@ -1,6 +1,12 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useInView,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -586,8 +592,27 @@ const LanguageFluency = ({ isDarkMode }) => {
 export default function PortfolioPage() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [showIntro, setShowIntro] = useState(true);
+  const heroRef = useRef(null);
   const lineRef = useRef(null);
   const purpleGlowRef = useRef(null);
+
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(heroScrollProgress, [0, 1], [0, -110]);
+  const heroOpacity = useTransform(
+    heroScrollProgress,
+    [0, 0.8, 1],
+    [1, 0.92, 0],
+  );
+  const heroScale = useTransform(heroScrollProgress, [0, 1], [1, 0.96]);
+  const heroBlur = useTransform(
+    heroScrollProgress,
+    [0, 1],
+    ["blur(0px)", "blur(8px)"],
+  );
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
@@ -785,68 +810,90 @@ export default function PortfolioPage() {
         </div>
 
         {/* HERO SECTION */}
-        <section className="relative z-10 flex flex-col md:flex-row items-center justify-between pt-20 md:pt-28 px-6 md:px-24 max-w-7xl mx-auto pb-6">
-          <div className="w-full md:w-[58%] mb-8 md:mb-0">
-            <motion.h1
-              initial={{ x: -50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[14vw] sm:text-[13vw] md:text-[6.9vw] lg:text-[6.6vw] font-black leading-[0.86] tracking-tighter mb-6 group cursor-default"
+        <motion.section
+          ref={heroRef}
+          style={{
+            y: heroY,
+            opacity: heroOpacity,
+            scale: heroScale,
+            filter: heroBlur,
+          }}
+          className="relative z-10 flex flex-col md:flex-row items-center justify-between pt-20 md:pt-36 px-6 md:px-24 max-w-[96rem] mx-auto pb-12 origin-top"
+        >
+          <div className="w-full md:w-[60%] mb-8 md:mb-0">
+            <motion.div
+              animate={{ y: [0, -7, 0] }}
+              transition={{
+                duration: 4.2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
-              <span className="relative block overflow-visible">
-                <span className="block transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
-                  CODE.
+              <motion.h1
+                initial={{ x: -50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[18vw] sm:text-[15vw] md:text-[8.4vw] lg:text-[7.8vw] font-black leading-[0.82] tracking-tighter mb-8 group cursor-default"
+              >
+                <span className="relative block overflow-visible">
+                  <span className="block transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
+                    CODE.
+                  </span>
+                  <span
+                    className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0"
+                    style={{
+                      color: "transparent",
+                      WebkitTextStroke: `1.5px ${isDarkMode ? "#f5f3ff" : "#111827"}`,
+                    }}
+                  >
+                    CODE.
+                  </span>
                 </span>
-                <span
-                  className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0"
-                  style={{
-                    color: "transparent",
-                    WebkitTextStroke: `1.5px ${isDarkMode ? "#f5f3ff" : "#111827"}`,
-                  }}
-                >
-                  CODE.
-                </span>
-              </span>
 
-              <span className="relative block overflow-visible">
-                <span className="block transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
-                  BUILD.
+                <span className="relative block overflow-visible">
+                  <span className="block transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
+                    BUILD.
+                  </span>
+                  <span
+                    className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0"
+                    style={{
+                      color: "transparent",
+                      WebkitTextStroke: `1.5px ${isDarkMode ? "#f5f3ff" : "#111827"}`,
+                    }}
+                  >
+                    BUILD.
+                  </span>
                 </span>
-                <span
-                  className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0"
-                  style={{
-                    color: "transparent",
-                    WebkitTextStroke: `1.5px ${isDarkMode ? "#f5f3ff" : "#111827"}`,
-                  }}
-                >
-                  BUILD.
-                </span>
-              </span>
 
-              <span className="relative block overflow-visible">
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
-                  INNOVATE.
+                <span className="relative block overflow-visible">
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
+                    INNOVATE.
+                  </span>
+                  <span
+                    className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0"
+                    style={{
+                      color: "transparent",
+                      WebkitTextStroke: "1.5px #c084fc",
+                    }}
+                  >
+                    INNOVATE.
+                  </span>
                 </span>
-                <span
-                  className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0"
-                  style={{
-                    color: "transparent",
-                    WebkitTextStroke: "1.5px #c084fc",
-                  }}
-                >
-                  INNOVATE.
-                </span>
-              </span>
-            </motion.h1>
-            <div className="max-w-md mt-6">
+              </motion.h1>
+            </motion.div>
+            <div className="max-w-lg mt-6">
               <h2
-                className={`text-2xl font-bold uppercase tracking-tight mb-3 transition-colors ${isDarkMode ? "text-white" : "text-black"}`}
+                className={`text-[1.6rem] md:text-[1.85rem] font-bold uppercase tracking-tight mb-3 transition-colors ${isDarkMode ? "text-white" : "text-black"}`}
               >
                 Hi, I&apos;m{" "}
                 <span className="text-purple-300 relative inline-block">
                   TIARA ESHWARA
-                  <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-blue-500" />
+                  <div className="absolute -bottom-2 left-0 flex flex-col gap-[3px]">
+                    <span className="block h-[1.5px] w-[170%] bg-blue-500 rounded-sm" />
+                    <span className="block h-[1.5px] w-[145%] bg-blue-400/90 rounded-sm" />
+                    <span className="block h-[1.5px] w-[120%] bg-blue-300/80 rounded-sm" />
+                  </div>
                 </span>
               </h2>
               <p
@@ -862,12 +909,12 @@ export default function PortfolioPage() {
             </div>
           </div>
 
-          <div className="w-full md:w-[42%] relative flex justify-end items-start md:items-center">
+          <div className="w-full md:w-[40%] relative flex justify-end items-start md:items-center">
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 1 }}
-              className="relative z-20 w-[85%] md:w-full max-w-[520px] -mt-5 md:-mt-10"
+              className="relative z-20 w-[90%] md:w-full max-w-[610px] -mt-5 md:-mt-12"
             >
               <img
                 src="/Images/image1.png"
@@ -882,7 +929,7 @@ export default function PortfolioPage() {
               />
             </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* PILL CATEGORIES */}
         <section
