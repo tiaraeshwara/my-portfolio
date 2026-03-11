@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img"
+    aria-label="user-portal project cover">
+    <defs>
+        <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#0b1220" />
+            <stop offset="100%" stop-color="#1e3a8a" />
+        </linearGradient>
+    </defs>
+    <rect width="1200" height="675" fill="url(#bg)" />
+    <rect x="110" y="120" width="980" height="440" rx="22" fill="#0f172a" stroke="#334155" />
+    <rect x="140" y="155" width="920" height="44" rx="10" fill="#1e293b" />
+    <circle cx="170" cy="177" r="8" fill="#38bdf8" />
+    <circle cx="195" cy="177" r="8" fill="#22c55e" />
+    <circle cx="220" cy="177" r="8" fill="#a78bfa" />
+    <rect x="160" y="230" width="260" height="285" rx="14" fill="#111827" stroke="#334155" />
+    <rect x="450" y="230" width="590" height="120" rx="14" fill="#111827" stroke="#334155" />
+    <rect x="450" y="380" width="280" height="135" rx="14" fill="#111827" stroke="#334155" />
+    <rect x="760" y="380" width="280" height="135" rx="14" fill="#111827" stroke="#334155" />
+    <text x="160" y="95" font-size="52" font-family="Segoe UI, Arial, sans-serif" font-weight="700"
+        fill="#e2e8f0">user-portal</text>
+    <text x="160" y="555" font-size="26" font-family="Segoe UI, Arial, sans-serif" fill="#93c5fd">TypeScript
+        • User management dashboard</text>
+</svg>
