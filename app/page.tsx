@@ -688,18 +688,57 @@ export default function PortfolioPage() {
 
         {/* HERO SECTION */}
         <section className="relative z-10 flex flex-col md:flex-row items-center justify-between pt-20 md:pt-28 px-6 md:px-24 max-w-7xl mx-auto pb-6">
-          <div className="w-full md:w-1/2 mb-8 md:mb-0">
+          <div className="w-full md:w-[58%] mb-8 md:mb-0">
             <motion.h1
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              className="text-[15vw] md:text-[8vw] font-black leading-[0.8] tracking-tighter mb-6"
+              whileHover={{ y: -8 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[14vw] sm:text-[13vw] md:text-[6.9vw] lg:text-[6.6vw] font-black leading-[0.86] tracking-tighter mb-6 group cursor-default"
             >
-              CODE.
-              <br />
-              BUILD.
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-                INNOVATE.
+              <span className="relative block overflow-visible">
+                <span className="block transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
+                  CODE.
+                </span>
+                <span
+                  className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: `1.5px ${isDarkMode ? "#f5f3ff" : "#111827"}`,
+                  }}
+                >
+                  CODE.
+                </span>
+              </span>
+
+              <span className="relative block overflow-visible">
+                <span className="block transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
+                  BUILD.
+                </span>
+                <span
+                  className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: `1.5px ${isDarkMode ? "#f5f3ff" : "#111827"}`,
+                  }}
+                >
+                  BUILD.
+                </span>
+              </span>
+
+              <span className="relative block overflow-visible">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
+                  INNOVATE.
+                </span>
+                <span
+                  className="absolute inset-0 opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: "1.5px #c084fc",
+                  }}
+                >
+                  INNOVATE.
+                </span>
               </span>
             </motion.h1>
             <div className="max-w-md mt-6">
@@ -725,7 +764,7 @@ export default function PortfolioPage() {
             </div>
           </div>
 
-          <div className="w-full md:w-1/2 relative flex justify-end items-start md:items-center">
+          <div className="w-full md:w-[42%] relative flex justify-end items-start md:items-center">
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
