@@ -11,6 +11,8 @@ if (typeof window !== "undefined") {
 // --- NEW CERTIFICATIONS COMPONENT ---
 const CertificationsSection = ({ isDarkMode }) => {
   const sectionRef = useRef(null);
+  const scrollbarRef = useRef<HTMLDivElement | null>(null);
+  const interactionTimeoutRef = useRef<number | null>(null);
   const certs = [
     {
       title: "Fundamentals of Machine Learning and Artificial Intelligence",
@@ -82,9 +84,47 @@ const CertificationsSection = ({ isDarkMode }) => {
   const maxShift = Math.max(certs.length - visibleCards, 0);
   const isInView = useInView(sectionRef, { amount: 0.35, once: false });
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isDraggingScrollbar, setIsDraggingScrollbar] = useState(false);
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const scrollProgress = maxShift > 0 ? activeIndex / maxShift : 0;
+  const thumbRatio = Math.min(1, visibleCards / certs.length);
+  const thumbHeightPercent = thumbRatio * 100;
+
+  const markInteraction = () => {
+    setIsUserInteracting(true);
+    if (interactionTimeoutRef.current) {
+      window.clearTimeout(interactionTimeoutRef.current);
+    }
+    interactionTimeoutRef.current = window.setTimeout(() => {
+      setIsUserInteracting(false);
+    }, 2400);
+  };
+
+  const updateIndexFromClientY = (clientY: number) => {
+    const rail = scrollbarRef.current;
+    if (!rail || maxShift <= 0) {
+      return;
+    }
+
+    const rect = rail.getBoundingClientRect();
+    const localY = clientY - rect.top;
+    const thumbHeightPx = rect.height * thumbRatio;
+    const travel = Math.max(rect.height - thumbHeightPx, 1);
+    const progress = Math.max(
+      0,
+      Math.min(1, (localY - thumbHeightPx / 2) / travel),
+    );
+    const nextIndex = Math.round(progress * maxShift);
+    setActiveIndex(nextIndex);
+  };
 
   useEffect(() => {
-    if (!isInView || maxShift <= 0) {
+    if (
+      !isInView ||
+      maxShift <= 0 ||
+      isDraggingScrollbar ||
+      isUserInteracting
+    ) {
       return;
     }
 
@@ -95,7 +135,38 @@ const CertificationsSection = ({ isDarkMode }) => {
     return () => {
       window.clearInterval(timer);
     };
-  }, [isInView, maxShift]);
+  }, [isInView, maxShift, isDraggingScrollbar, isUserInteracting]);
+
+  useEffect(() => {
+    if (!isDraggingScrollbar) {
+      return;
+    }
+
+    const onPointerMove = (event: PointerEvent) => {
+      updateIndexFromClientY(event.clientY);
+    };
+
+    const onPointerUp = () => {
+      setIsDraggingScrollbar(false);
+      markInteraction();
+    };
+
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+    };
+  }, [isDraggingScrollbar]);
+
+  useEffect(() => {
+    return () => {
+      if (interactionTimeoutRef.current) {
+        window.clearTimeout(interactionTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const getCardMotion = (idx: number) => {
     const relative = idx - activeIndex;
@@ -148,7 +219,7 @@ const CertificationsSection = ({ isDarkMode }) => {
             className={`absolute left-0 md:left-4 top-0 md:top-5 bottom-0 md:bottom-5 w-[1px] ${isDarkMode ? "bg-white/10" : "bg-black/10"}`}
           />
 
-          <div className="relative h-[640px] md:h-[760px] overflow-hidden">
+          <div className="relative h-[640px] md:h-[760px] overflow-hidden pr-5 md:pr-8">
             {certs.map((cert, idx) => (
               <motion.div
                 key={idx}
@@ -246,6 +317,33 @@ const CertificationsSection = ({ isDarkMode }) => {
                 </div>
               </motion.div>
             ))}
+
+            <div
+              ref={scrollbarRef}
+              onPointerDown={(event) => {
+                setIsDraggingScrollbar(true);
+                markInteraction();
+                updateIndexFromClientY(event.clientY);
+              }}
+              className={`absolute top-6 md:top-8 right-0 w-[4px] h-[88%] rounded-full overflow-hidden ${
+                isDarkMode ? "bg-white/10" : "bg-black/10"
+              } cursor-pointer`}
+            >
+              <motion.div
+                onPointerDown={(event) => {
+                  setIsDraggingScrollbar(true);
+                  markInteraction();
+                  updateIndexFromClientY(event.clientY);
+                }}
+                animate={{
+                  y: `${scrollProgress * (100 - thumbHeightPercent)}%`,
+                  height: `${thumbHeightPercent}%`,
+                }}
+                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full rounded-full bg-gradient-to-b from-blue-400 via-purple-500 to-pink-500 shadow-[0_0_18px_rgba(168,85,247,0.5)] active:scale-y-105"
+                style={{ touchAction: "none" }}
+              />
+            </div>
           </div>
         </div>
       </div>
