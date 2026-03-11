@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img"
+    aria-label="employee payroll system project cover">
+    <defs>
+        <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#0f172a" />
+            <stop offset="100%" stop-color="#1d4ed8" />
+        </linearGradient>
+    </defs>
+    <rect width="1200" height="675" fill="url(#bg)" />
+    <rect x="120" y="100" width="960" height="475" rx="24" fill="#0b1220" stroke="#334155" />
+    <rect x="160" y="145" width="380" height="390" rx="16" fill="#111827" stroke="#334155" />
+    <rect x="580" y="145" width="460" height="80" rx="14" fill="#111827" stroke="#334155" />
+    <rect x="580" y="250" width="460" height="80" rx="14" fill="#111827" stroke="#334155" />
+    <rect x="580" y="355" width="460" height="80" rx="14" fill="#111827" stroke="#334155" />
+    <rect x="580" y="460" width="230" height="60" rx="14" fill="#2563eb" />
+    <rect x="830" y="460" width="210" height="60" rx="14" fill="#1e293b" stroke="#334155" />
+    <circle cx="350" cy="245" r="55" fill="#60a5fa" />
+    <rect x="280" y="320" width="140" height="160" rx="20" fill="#3b82f6" />
+    <text x="160" y="84" font-size="46" font-family="Segoe UI, Arial, sans-serif" font-weight="700"
+        fill="#dbeafe">employee_payroll_system</text>
+    <text x="160" y="560" font-size="26" font-family="Segoe UI, Arial, sans-serif" fill="#bfdbfe">Employee
+        records • Payroll operations</text>
+</svg>

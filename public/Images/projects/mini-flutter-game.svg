@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img"
+    aria-label="mini_flutter_game project cover">
+    <defs>
+        <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#1f1147" />
+            <stop offset="100%" stop-color="#4c1d95" />
+        </linearGradient>
+    </defs>
+    <rect width="1200" height="675" fill="url(#bg)" />
+    <rect x="125" y="105" width="950" height="465" rx="24" fill="#180d35" stroke="#5b21b6" />
+    <rect x="170" y="150" width="860" height="375" rx="16" fill="#100826" stroke="#6d28d9" />
+    <circle cx="300" cy="300" r="62" fill="#22d3ee" />
+    <polygon points="500,330 620,240 740,330 620,420" fill="#f472b6" />
+    <rect x="820" y="230" width="140" height="140" rx="16" fill="#a3e635" />
+    <text x="160" y="88" font-size="50" font-family="Segoe UI, Arial, sans-serif" font-weight="700"
+        fill="#ede9fe">mini_flutter_game</text>
+    <text x="160" y="555" font-size="26" font-family="Segoe UI, Arial, sans-serif" fill="#c4b5fd">C++
+        • Lightweight gameplay prototype</text>
+</svg>
