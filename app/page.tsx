@@ -438,13 +438,14 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
                 delay: 0.5 + idx * 0.1,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              whileHover={{ y: -2 }}
+              whileHover={{ y: -5, scale: 1.04 }}
               className={`relative py-1 text-[10px] font-black uppercase tracking-widest transition-all group ${
                 isDarkMode
                   ? "text-gray-400 hover:text-white"
                   : "text-gray-600 hover:text-black"
               }`}
             >
+              <span className="absolute inset-0 -z-10 rounded-md opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100 bg-gradient-to-r from-blue-500/0 via-purple-500/25 to-pink-500/0" />
               {link.name}
               <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-purple-500 transition-all duration-300 ease-out group-hover:w-full" />
             </motion.a>
@@ -471,8 +472,9 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1 }}
             whileHover={{
-              scale: 1.05,
-              boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.4)",
+              y: -2,
+              scale: 1.07,
+              boxShadow: "0px 0px 26px rgba(168, 85, 247, 0.5)",
             }}
             whileTap={{ scale: 0.95 }}
             className={`px-6 py-2 rounded-full text-[10px] font-black transition-all uppercase tracking-tight ${
@@ -498,9 +500,47 @@ const LanguageFluency = ({ isDarkMode }) => {
   ];
 
   const [hovered, setHovered] = useState(null);
+  const [isLangSectionHovered, setIsLangSectionHovered] = useState(false);
+  const [cycleIndex, setCycleIndex] = useState(0);
+
+  useEffect(() => {
+    if (!isLangSectionHovered) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setCycleIndex((prev) => (prev + 1) % languages.length);
+    }, 850);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [isLangSectionHovered, languages.length]);
+
+  const activeLang =
+    hovered || (isLangSectionHovered ? languages[cycleIndex] : null);
 
   return (
-    <section className="relative z-10 max-w-5xl mx-auto px-6 py-24 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
+    <section
+      className="relative z-10 max-w-5xl mx-auto px-6 py-24 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24"
+      onMouseEnter={() => setIsLangSectionHovered(true)}
+      onMouseLeave={() => {
+        setIsLangSectionHovered(false);
+        setHovered(null);
+      }}
+    >
+      <div className="absolute -top-2 left-1/2 -translate-x-1/2 text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: false, amount: 0.8 }}
+          className="text-[10px] font-black uppercase tracking-[0.35em] text-purple-400"
+        >
+          LANGUAGE INTELLIGENCE MATRIX
+        </motion.p>
+      </div>
+
       <div className="relative w-72 h-72 flex items-center justify-center">
         <svg
           className="w-full h-full transform -rotate-90"
@@ -530,15 +570,21 @@ const LanguageFluency = ({ isDarkMode }) => {
                   cy="100"
                   r={lang.radius}
                   stroke={lang.color}
-                  strokeWidth="10"
+                  strokeWidth={activeLang?.name === lang.name ? 12 : 10}
                   fill="transparent"
                   strokeDasharray={circumference}
                   initial={{ strokeDashoffset: circumference }}
                   whileInView={{ strokeDashoffset: offset }}
+                  animate={{
+                    opacity:
+                      activeLang && activeLang.name !== lang.name ? 0.35 : 1,
+                  }}
                   transition={{ duration: 2, ease: "circOut", delay: i * 0.2 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.8 }}
                   strokeLinecap="round"
-                  style={{ filter: `drop-shadow(0 0 8px ${lang.color}88)` }}
+                  style={{
+                    filter: `drop-shadow(0 0 ${activeLang?.name === lang.name ? 14 : 8}px ${lang.color}88)`,
+                  }}
                 />
               </g>
             );
@@ -547,29 +593,33 @@ const LanguageFluency = ({ isDarkMode }) => {
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
           <AnimatePresence mode="wait">
             <motion.span
-              key={hovered ? hovered.value : "total"}
+              key={activeLang ? activeLang.value : "total"}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               className={`text-4xl font-black transition-colors ${isDarkMode ? "text-white" : "text-black"}`}
             >
-              {hovered ? hovered.value : "98"}%
+              {activeLang ? activeLang.value : "98"}%
             </motion.span>
           </AnimatePresence>
           <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">
-            {hovered ? hovered.name : "Fluency"}
+            {activeLang ? activeLang.name : "Fluency"}
           </span>
         </div>
       </div>
 
       <div className="flex flex-col gap-6">
         {languages.map((lang) => (
-          <div
+          <motion.div
             key={lang.name}
-            className={`flex items-center gap-4 transition-opacity duration-300 ${hovered && hovered.name !== lang.name ? "opacity-30" : "opacity-100"}`}
+            initial={{ opacity: 0, x: 14 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.85 }}
+            className={`flex items-center gap-4 transition-all duration-300 ${activeLang && activeLang.name !== lang.name ? "opacity-30" : "opacity-100"} ${activeLang?.name === lang.name ? "translate-x-1" : ""}`}
           >
             <div
-              className="w-3 h-3 rounded-full"
+              className={`w-3 h-3 rounded-full transition-transform duration-300 ${activeLang?.name === lang.name ? "scale-125" : ""}`}
               style={{ backgroundColor: lang.color }}
             />
             <div>
@@ -582,7 +632,7 @@ const LanguageFluency = ({ isDarkMode }) => {
                 {lang.value}% Proficiency
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
@@ -613,6 +663,13 @@ export default function PortfolioPage() {
     [0, 1],
     ["blur(0px)", "blur(8px)"],
   );
+
+  const sectionReveal = {
+    initial: { opacity: 0, y: 48, scale: 0.985 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 1.05, ease: [0.16, 1, 0.3, 1] },
+    viewport: { once: false, amount: 0.18 },
+  } as const;
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
@@ -832,7 +889,7 @@ export default function PortfolioPage() {
               <motion.h1
                 initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -12, scale: 1.01 }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="text-[18vw] sm:text-[15vw] md:text-[8.4vw] lg:text-[7.8vw] font-black leading-[0.82] tracking-tighter mb-8 group cursor-default"
               >
@@ -912,8 +969,11 @@ export default function PortfolioPage() {
           <div className="w-full md:w-[40%] relative flex justify-end items-start md:items-center">
             <motion.div
               initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 1 }}
+              animate={{ y: [0, -10, 0], opacity: 1 }}
+              transition={{
+                y: { duration: 5.5, repeat: Infinity, ease: "easeInOut" },
+                opacity: { delay: 0.2, duration: 1 },
+              }}
               className="relative z-20 w-[90%] md:w-full max-w-[610px] -mt-5 md:-mt-12"
             >
               <img
@@ -932,9 +992,10 @@ export default function PortfolioPage() {
         </motion.section>
 
         {/* PILL CATEGORIES */}
-        <section
+        <motion.section
           id="DEVELOPMENTS"
           className="relative z-10 max-w-7xl mx-auto px-6 md:px-24 py-8 flex flex-wrap gap-4"
+          {...sectionReveal}
         >
           {[
             "Front-end",
@@ -958,10 +1019,13 @@ export default function PortfolioPage() {
               {cat}
             </motion.div>
           ))}
-        </section>
+        </motion.section>
 
         {/* WORKFLOW SECTION */}
-        <section className="relative z-10 py-32 max-w-6xl mx-auto px-6 process-container">
+        <motion.section
+          className="relative z-10 py-32 max-w-6xl mx-auto px-6 process-container"
+          {...sectionReveal}
+        >
           <div className="text-center mb-24">
             <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-500 mb-4">
               My Workflow
@@ -983,7 +1047,7 @@ export default function PortfolioPage() {
             {steps.map((step, index) => (
               <div
                 key={step.title}
-                className={`process-item relative flex flex-col md:flex-row items-center mb-40 ${index % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
+                className={`process-item group relative flex flex-col md:flex-row items-center mb-40 transition-transform duration-500 hover:-translate-y-1 ${index % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
               >
                 <div className="w-full md:w-1/2 px-10 text-center md:text-left">
                   <div
@@ -992,16 +1056,16 @@ export default function PortfolioPage() {
                     }
                   >
                     <h3
-                      className={`text-2xl font-bold mb-4 ${isDarkMode ? "text-white" : "text-black"}`}
+                      className={`text-2xl font-bold mb-4 transition-all duration-500 group-hover:tracking-wide ${isDarkMode ? "text-white group-hover:text-purple-300" : "text-black group-hover:text-purple-700"}`}
                     >
                       {step.title}
                     </h3>
-                    <p className="text-gray-500 text-sm max-w-sm mx-auto md:mx-0 inline-block">
+                    <p className="text-gray-500 text-sm max-w-sm mx-auto md:mx-0 inline-block transition-colors duration-500 group-hover:text-gray-300">
                       {step.desc}
                     </p>
                     <div className="mt-5 flex flex-wrap gap-3 justify-center md:justify-start">
                       <span
-                        className={`text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border ${
+                        className={`text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border transition-all duration-500 group-hover:scale-105 ${
                           isDarkMode
                             ? "bg-white/5 border-white/10 text-gray-300"
                             : "bg-black/5 border-black/10 text-gray-700"
@@ -1017,14 +1081,14 @@ export default function PortfolioPage() {
                       href={step.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block mt-4 text-[10px] font-black uppercase tracking-[0.25em] text-purple-400 hover:text-purple-300 transition-colors"
+                      className="inline-block mt-4 text-[10px] font-black uppercase tracking-[0.25em] text-purple-400 hover:text-purple-300 transition-all duration-500 group-hover:tracking-[0.3em]"
                     >
                       View Repository
                     </a>
                   </div>
                 </div>
                 <div
-                  className={`absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border shadow-[0_0_15px_rgba(168,85,247,0.4)] flex items-center justify-center z-10 transition-colors ${
+                  className={`absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border shadow-[0_0_15px_rgba(168,85,247,0.4)] flex items-center justify-center z-10 transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_28px_rgba(168,85,247,0.65)] ${
                     isDarkMode
                       ? "bg-[#050505] border-white/20"
                       : "bg-white border-black/20"
@@ -1036,7 +1100,7 @@ export default function PortfolioPage() {
                 </div>
                 <div className="w-full md:w-1/2 px-10 mt-10 md:mt-0">
                   <div
-                    className={`aspect-video rounded-3xl border backdrop-blur-sm p-4 hover:border-purple-500/30 transition-colors ${
+                    className={`aspect-video rounded-3xl border backdrop-blur-sm p-4 hover:border-purple-500/30 transition-all duration-500 group-hover:shadow-[0_18px_40px_rgba(139,92,246,0.24)] ${
                       isDarkMode
                         ? "bg-white/[0.03] border-white/5"
                         : "bg-black/[0.03] border-black/5"
@@ -1052,7 +1116,7 @@ export default function PortfolioPage() {
                       <img
                         src={step.image}
                         alt={`${step.title} preview`}
-                        className="w-full h-full object-cover rounded-xl"
+                        className="w-full h-full object-cover rounded-xl transition-transform duration-700 group-hover:scale-[1.04]"
                       />
                     </div>
                   </div>
@@ -1060,12 +1124,13 @@ export default function PortfolioPage() {
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* SKILLS SECTION */}
-        <section
+        <motion.section
           id="SKILLS"
           className="relative z-10 py-24 max-w-4xl mx-auto px-6"
+          {...sectionReveal}
         >
           <h2 className="text-center text-purple-400 text-[10px] font-black uppercase tracking-[0.5em] mb-20">
             Technical Skills
@@ -1097,17 +1162,22 @@ export default function PortfolioPage() {
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        <LanguageFluency isDarkMode={isDarkMode} />
+        <motion.div {...sectionReveal}>
+          <LanguageFluency isDarkMode={isDarkMode} />
+        </motion.div>
 
         {/* CERTIFICATIONS SECTION */}
-        <CertificationsSection isDarkMode={isDarkMode} />
+        <motion.div {...sectionReveal}>
+          <CertificationsSection isDarkMode={isDarkMode} />
+        </motion.div>
 
         {/* CONTACT SECTION */}
-        <section
+        <motion.section
           id="CONTACTS"
           className={`relative z-10 py-32 max-w-7xl mx-auto px-6 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
+          {...sectionReveal}
         >
           <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.5em] mb-16">
             CONTACT
@@ -1120,34 +1190,50 @@ export default function PortfolioPage() {
               },
               { name: "GITHUB", href: "https://github.com/tiaraeshwara" },
               { name: "EMAIL", href: "mailto:tiaraeshwara320@gmail.com" },
-            ].map((link) => (
-              <a
+            ].map((link, index) => (
+              <motion.a
                 key={link.name}
                 href={link.href}
                 target={link.name !== "EMAIL" ? "_blank" : "_self"}
                 rel="noopener noreferrer"
-                className="flex items-center gap-8 group transition-all w-fit"
+                initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.85,
+                  delay: index * 0.08,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                viewport={{ once: false, amount: 0.4 }}
+                whileHover={{ x: 12, scale: 1.015 }}
+                className="relative flex items-center gap-8 group transition-all w-fit"
               >
                 <span
                   className={`w-8 h-[1px] group-hover:w-16 group-hover:bg-purple-500 transition-all duration-500 ${isDarkMode ? "bg-white/20" : "bg-black/20"}`}
                 />
                 <span
-                  className={`text-4xl md:text-7xl font-black tracking-tighter group-hover:text-purple-400 transition-colors ${isDarkMode ? "text-white" : "text-black"}`}
+                  className={`text-4xl md:text-7xl font-black tracking-tighter group-hover:text-purple-400 transition-all duration-500 group-hover:tracking-tight ${isDarkMode ? "text-white" : "text-black"}`}
                 >
                   {link.name}
                 </span>
-              </a>
+                <span className="absolute -inset-x-4 -inset-y-2 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl bg-gradient-to-r from-blue-500/0 via-purple-500/10 to-pink-500/0" />
+              </motion.a>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* EXPERIENCE SECTION */}
-        <section
+        <motion.section
           id="EXPERIENCE_CARDS"
           className={`relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 pb-32 pt-20 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
+          {...sectionReveal}
         >
-          <div
-            className={`border p-8 rounded-3xl transition-colors ${isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"}`}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: false, amount: 0.4 }}
+            whileHover={{ y: -8, scale: 1.015 }}
+            className={`border p-8 rounded-3xl transition-all ${isDarkMode ? "bg-white/[0.03] border-white/5 hover:shadow-[0_16px_55px_rgba(168,85,247,0.16)]" : "bg-black/[0.03] border-black/5 hover:shadow-[0_16px_55px_rgba(76,29,149,0.12)]"}`}
           >
             <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-10">
               History
@@ -1164,9 +1250,14 @@ export default function PortfolioPage() {
               UI/UX Intern
             </p>
             <p className="text-gray-500 text-xs italic">2022 - 2023</p>
-          </div>
-          <div
-            className={`border p-8 rounded-3xl transition-colors ${isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"}`}
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: false, amount: 0.4 }}
+            whileHover={{ y: -8, scale: 1.015 }}
+            className={`border p-8 rounded-3xl transition-all ${isDarkMode ? "bg-white/[0.03] border-white/5 hover:shadow-[0_16px_55px_rgba(168,85,247,0.16)]" : "bg-black/[0.03] border-black/5 hover:shadow-[0_16px_55px_rgba(76,29,149,0.12)]"}`}
           >
             <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-10">
               Education
@@ -1177,16 +1268,21 @@ export default function PortfolioPage() {
               BSc Software Engineering
             </p>
             <p className="text-gray-500 text-xs">NSBM Green University</p>
-          </div>
-          <div
-            className={`border p-8 rounded-3xl flex items-end transition-colors ${isDarkMode ? "bg-white/[0.03] border-white/5" : "bg-black/[0.03] border-black/5"}`}
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: false, amount: 0.4 }}
+            whileHover={{ y: -8, scale: 1.015 }}
+            className={`border p-8 rounded-3xl flex items-end transition-all ${isDarkMode ? "bg-white/[0.03] border-white/5 hover:shadow-[0_16px_55px_rgba(168,85,247,0.16)]" : "bg-black/[0.03] border-black/5 hover:shadow-[0_16px_55px_rgba(76,29,149,0.12)]"}`}
           >
             <p className="text-gray-500 text-[10px] uppercase tracking-widest leading-relaxed">
               Engineering refined digital systems with a focus on logic and
               human intuition.
             </p>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
       </motion.main>
     </>
   );
