@@ -367,11 +367,11 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
   ];
 
   return (
-    <nav className="fixed top-5 left-0 w-full z-[100] px-7">
+    <nav className="fixed inset-x-0 top-0 z-[300] px-4 md:px-7 pt-3">
       <motion.div
-        initial={{ y: -100, opacity: 0 }}
+        initial={false}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         className={`max-w-12xl mx-auto flex items-center justify-between backdrop-blur-xl border px-8 py-1 rounded-full shadow-2xl transition-all duration-500 ${
           isDarkMode
             ? "bg-black/40 border-white/10"
@@ -467,7 +467,8 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             {isDarkMode ? "🔆" : "🌙"}
           </motion.button>
 
-          <motion.button
+          <motion.a
+            href="#CONTACTS"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1 }}
@@ -477,14 +478,14 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
               boxShadow: "0px 0px 26px rgba(168, 85, 247, 0.5)",
             }}
             whileTap={{ scale: 0.95 }}
-            className={`px-6 py-2 rounded-full text-[10px] font-black transition-all uppercase tracking-tight ${
+            className={`inline-flex items-center px-6 py-2 rounded-full text-[10px] font-black transition-all uppercase tracking-tight ${
               isDarkMode
                 ? "bg-white text-black hover:bg-purple-500 hover:text-white"
                 : "bg-black text-white"
             }`}
           >
             Let&apos;s Talk
-          </motion.button>
+          </motion.a>
         </div>
       </motion.div>
     </nav>
@@ -879,6 +880,8 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
+      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+
       <motion.main
         id="top"
         initial={{ opacity: 0, y: 18 }}
@@ -899,8 +902,6 @@ export default function PortfolioPage() {
             scroll-behavior: smooth;
           }
         `}</style>
-
-        <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 
         {/* BACKGROUND GLOW */}
         <div className="fixed inset-0 z-0 pointer-events-none">
