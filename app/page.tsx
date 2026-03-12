@@ -191,7 +191,7 @@ const CertificationsSection = ({ isDarkMode }) => {
     <section
       id="EXPERIENCE"
       ref={sectionRef}
-      className="relative z-10 py-32 max-w-7xl mx-auto px-6 overflow-hidden"
+      className="relative z-10 py-32 max-w-[98rem] mx-auto px-4 md:px-8 lg:px-10 overflow-hidden"
     >
       <div className="flex flex-col md:flex-row gap-12">
         {/* Left Side: Title */}
@@ -522,7 +522,7 @@ const LanguageFluency = ({ isDarkMode }) => {
 
   return (
     <section
-      className="relative z-10 max-w-5xl mx-auto px-6 py-24 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24"
+      className="relative z-10 max-w-[94rem] mx-auto px-4 md:px-8 lg:px-10 py-24 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24"
       onMouseEnter={() => setIsLangSectionHovered(true)}
       onMouseLeave={() => {
         setIsLangSectionHovered(false);
@@ -642,9 +642,13 @@ const LanguageFluency = ({ isDarkMode }) => {
 export default function PortfolioPage() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [showIntro, setShowIntro] = useState(true);
+  const [copiedField, setCopiedField] = useState<null | "email">(null);
+  const [systemTime, setSystemTime] = useState("");
+  const [systemZone, setSystemZone] = useState("");
   const heroRef = useRef(null);
   const lineRef = useRef(null);
   const purpleGlowRef = useRef(null);
+  const copyTimeoutRef = useRef<number | null>(null);
 
   const { scrollYProgress: heroScrollProgress } = useScroll({
     target: heroRef,
@@ -672,6 +676,21 @@ export default function PortfolioPage() {
   } as const;
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
+
+  const copyText = async (text: string, field: "email") => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedField(field);
+      if (copyTimeoutRef.current) {
+        window.clearTimeout(copyTimeoutRef.current);
+      }
+      copyTimeoutRef.current = window.setTimeout(() => {
+        setCopiedField(null);
+      }, 1400);
+    } catch {
+      setCopiedField(null);
+    }
+  };
 
   useEffect(() => {
     gsap.to(purpleGlowRef.current, {
@@ -725,6 +744,37 @@ export default function PortfolioPage() {
 
     return () => {
       window.clearTimeout(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const updateSystemClock = () => {
+      const now = new Date();
+      setSystemTime(
+        new Intl.DateTimeFormat(undefined, {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        }).format(now),
+      );
+
+      const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Local";
+      const shortZone = zone.split("/").pop()?.replace(/_/g, " ") || "Local";
+      setSystemZone(shortZone);
+    };
+
+    updateSystemClock();
+    const interval = window.setInterval(updateSystemClock, 1000);
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) {
+        window.clearTimeout(copyTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -875,9 +925,9 @@ export default function PortfolioPage() {
             scale: heroScale,
             filter: heroBlur,
           }}
-          className="relative z-10 flex flex-col md:flex-row items-center justify-between pt-20 md:pt-36 px-6 md:px-24 max-w-[96rem] mx-auto pb-12 origin-top"
+          className="relative z-10 flex flex-col md:flex-row items-center justify-between pt-8 md:pt-14 px-4 md:px-8 lg:px-10 max-w-[99rem] mx-auto pb-1 md:pb-2 origin-top"
         >
-          <div className="w-full md:w-[60%] mb-8 md:mb-0">
+          <div className="w-full md:w-[60%] mb-5 md:mb-0">
             <motion.div
               animate={{ y: [0, -7, 0] }}
               transition={{
@@ -891,7 +941,7 @@ export default function PortfolioPage() {
                 animate={{ x: 0, opacity: 1 }}
                 whileHover={{ y: -12, scale: 1.01 }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[18vw] sm:text-[15vw] md:text-[8.4vw] lg:text-[7.8vw] font-black leading-[0.82] tracking-tighter mb-8 group cursor-default"
+                className="text-[18vw] sm:text-[15vw] md:text-[8.8vw] lg:text-[8vw] font-black leading-[0.82] tracking-tighter mb-6 group cursor-default"
               >
                 <span className="relative block overflow-visible">
                   <span className="block transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
@@ -939,7 +989,7 @@ export default function PortfolioPage() {
                 </span>
               </motion.h1>
             </motion.div>
-            <div className="max-w-lg mt-6">
+            <div className="max-w-lg mt-3">
               <h2
                 className={`text-[1.6rem] md:text-[1.85rem] font-bold uppercase tracking-tight mb-3 transition-colors ${isDarkMode ? "text-white" : "text-black"}`}
               >
@@ -954,7 +1004,7 @@ export default function PortfolioPage() {
                 </span>
               </h2>
               <p
-                className={`text-sm md:text-base transition-colors leading-relaxed ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}
+                className={`text-sm md:text-base transition-colors leading-relaxed ${isDarkMode ? "text-gray-400" : "text-gray-600"} width-adjust`}
               >
                 Driven by a passion for building seamless, end-to-end digital
                 experiences, I pair a rigorous engineering mindset with a
@@ -974,7 +1024,7 @@ export default function PortfolioPage() {
                 y: { duration: 5.5, repeat: Infinity, ease: "easeInOut" },
                 opacity: { delay: 0.2, duration: 1 },
               }}
-              className="relative z-20 w-[90%] md:w-full max-w-[610px] -mt-5 md:-mt-12"
+              className="relative z-20 w-[90%] md:w-full max-w-[610px] mt-4 md:mt-8"
             >
               <img
                 src="/Images/image1.png"
@@ -994,7 +1044,7 @@ export default function PortfolioPage() {
         {/* PILL CATEGORIES */}
         <motion.section
           id="DEVELOPMENTS"
-          className="relative z-10 max-w-7xl mx-auto px-6 md:px-24 py-8 flex flex-wrap gap-4"
+          className="relative z-10 -mt-14 md:-mt-20 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 py-3 flex flex-wrap gap-4"
           {...sectionReveal}
         >
           {[
@@ -1023,10 +1073,10 @@ export default function PortfolioPage() {
 
         {/* WORKFLOW SECTION */}
         <motion.section
-          className="relative z-10 py-32 max-w-6xl mx-auto px-6 process-container"
+          className="relative z-10 py-16 md:py-20 max-w-[96rem] mx-auto px-4 md:px-8 lg:px-10 process-container"
           {...sectionReveal}
         >
-          <div className="text-center mb-24">
+          <div className="text-center mb-14 md:mb-16">
             <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-500 mb-4">
               My Workflow
             </p>
@@ -1047,7 +1097,7 @@ export default function PortfolioPage() {
             {steps.map((step, index) => (
               <div
                 key={step.title}
-                className={`process-item group relative flex flex-col md:flex-row items-center mb-40 transition-transform duration-500 hover:-translate-y-1 ${index % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
+                className={`process-item group relative flex flex-col md:flex-row items-center mb-20 md:mb-24 last:mb-0 transition-transform duration-500 hover:-translate-y-1 ${index % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
               >
                 <div className="w-full md:w-1/2 px-10 text-center md:text-left">
                   <div
@@ -1129,13 +1179,13 @@ export default function PortfolioPage() {
         {/* SKILLS SECTION */}
         <motion.section
           id="SKILLS"
-          className="relative z-10 py-24 max-w-4xl mx-auto px-6"
+          className="relative z-10 py-12 md:py-16 max-w-[92rem] mx-auto px-4 md:px-8 lg:px-10"
           {...sectionReveal}
         >
-          <h2 className="text-center text-purple-400 text-[10px] font-black uppercase tracking-[0.5em] mb-20">
+          <h2 className="text-center text-purple-400 text-[10px] font-black uppercase tracking-[0.5em] mb-10">
             Technical Skills
           </h2>
-          <div className="space-y-10">
+          <div className="space-y-7">
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
@@ -1210,13 +1260,107 @@ export default function PortfolioPage() {
         {/* CONTACT SECTION */}
         <motion.section
           id="CONTACTS"
-          className={`relative z-10 py-32 max-w-7xl mx-auto px-6 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
+          className={`relative z-10 py-16 md:py-20 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
           {...sectionReveal}
         >
-          <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.5em] mb-16">
+          <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.5em] mb-9">
             CONTACT
           </h3>
-          <div className="space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: false, amount: 0.4 }}
+            whileHover={{ y: -4, scale: 1.01 }}
+            className={`group mb-10 block rounded-2xl border p-5 md:p-6 backdrop-blur-sm transition-all ${
+              isDarkMode
+                ? "bg-white/[0.03] border-white/10 hover:border-purple-400/50 hover:shadow-[0_18px_50px_rgba(168,85,247,0.18)]"
+                : "bg-black/[0.03] border-black/10 hover:border-purple-500/50 hover:shadow-[0_18px_50px_rgba(76,29,149,0.14)]"
+            }`}
+          >
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div className="min-w-0">
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-gray-500 mb-2">
+                  INITIATE HANDSHAKE
+                </p>
+                <p
+                  className={`text-lg md:text-3xl font-black tracking-tight break-all transition-colors ${
+                    isDarkMode
+                      ? "text-white group-hover:text-purple-200"
+                      : "text-black group-hover:text-purple-700"
+                  }`}
+                >
+                  tiaraeshwara320@gmail.com
+                </p>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => copyText("tiaraeshwara320@gmail.com", "email")}
+                  className={`px-3 h-11 rounded-xl border text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 inline-flex items-center gap-2 ${
+                    isDarkMode
+                      ? "border-white/10 text-white/70 hover:border-purple-400/40 hover:text-purple-200"
+                      : "border-black/10 text-black/60 hover:border-purple-500/40 hover:text-purple-700"
+                  }`}
+                >
+                  {copiedField === "email" ? (
+                    <>
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="w-3.5 h-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
+                      >
+                        <path d="M20 6 9 17l-5-5" />
+                      </svg>
+                      Copied
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="w-3.5 h-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
+                      >
+                        <rect
+                          x="9"
+                          y="9"
+                          width="13"
+                          height="13"
+                          rx="2"
+                          ry="2"
+                        />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                      </svg>
+                      Copy ID
+                    </>
+                  )}
+                </button>
+                <a
+                  href="mailto:tiaraeshwara320@gmail.com"
+                  className={`inline-flex items-center justify-center w-11 h-11 rounded-xl border transition-all duration-300 ${
+                    isDarkMode
+                      ? "border-white/10 text-white/70 hover:border-purple-400/40 hover:text-purple-200"
+                      : "border-black/10 text-black/60 hover:border-purple-500/40 hover:text-purple-700"
+                  }`}
+                  aria-label="Send email"
+                >
+                  ↗
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="space-y-7">
             {[
               {
                 name: "LINKEDIN",
@@ -1258,7 +1402,7 @@ export default function PortfolioPage() {
         {/* EXPERIENCE SECTION */}
         <motion.section
           id="EXPERIENCE_CARDS"
-          className={`relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 pb-32 pt-20 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
+          className={`relative z-10 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-6 pb-32 pt-20 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
           {...sectionReveal}
         >
           <motion.div
@@ -1316,6 +1460,29 @@ export default function PortfolioPage() {
               human intuition.
             </p>
           </motion.div>
+        </motion.section>
+
+        <motion.section
+          className={`relative z-10 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 pb-10 md:pb-12 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
+          {...sectionReveal}
+        >
+          <div
+            className={`pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 ${
+              isDarkMode ? "text-white" : "text-black"
+            }`}
+          >
+            <div>
+              <p className="text-[9px] uppercase font-black tracking-[0.24em] text-gray-500 mb-1.5">
+                Local Time
+              </p>
+              <p className="text-xl md:text-2xl font-extrabold tracking-tight leading-none">
+                {systemZone} - {systemTime || "--:--"}
+              </p>
+            </div>
+            <p className="text-[10px] uppercase tracking-[0.18em] text-gray-500 font-bold">
+              © {new Date().getFullYear()} TIARA ESHWARA
+            </p>
+          </div>
         </motion.section>
       </motion.main>
     </>
