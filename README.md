@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tiara Eshwara Portfolio
+
+A modern, animated single-page portfolio built with Next.js, React, Tailwind CSS v4, Framer Motion, and GSAP.
+
+The page focuses on a cinematic hero, interactive project/workflow timeline, skill visualization, certification feed, and an elegant contact experience.
+
+## Project Overview
+
+This portfolio is implemented mainly in `app/page.tsx` as a highly customized single-page experience.
+
+Major sections:
+
+- Hero (`CODE. BUILD. INNOVATE.`)
+- Developments tag/pill row
+- Workflow / projects timeline with previews
+- Technical skills progress bars
+- Language intelligence matrix
+- Certifications rotating feed
+- Contact + email handshake card with copy action
+- Experience cards
+- End footer with live local system time
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion
+- GSAP + ScrollTrigger
+- next-themes (theme support utility)
+
+## Features
+
+- Always-visible fixed navbar
+- Scroll-linked hero transition effects
+- Smooth section reveal animations
+- Hover-rich interactions for cards and workflow items
+- Copy-to-clipboard email action with feedback (`Copy ID` -> `Copied`)
+- Live local time footer using system timezone
+- Theme toggle in navbar
+- Fully responsive layout behavior
+
+## Folder Structure
+
+```text
+app/
+	globals.css
+	layout.tsx
+	page.tsx
+components/
+	ThemeProvider.tsx
+public/
+	Images/
+```
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Run development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open in browser:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Available Scripts
 
-## Learn More
+- `npm run dev` - start development server
+- `npm run build` - build for production
+- `npm run start` - run production build
+- `npm run lint` - run ESLint
 
-To learn more about Next.js, take a look at the following resources:
+## Customization Guide
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Most content is centralized in `app/page.tsx`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Update project cards: edit `steps` array
+- Update skill bars: edit `skills` array
+- Update certifications: edit `certs` array inside `CertificationsSection`
+- Update contact links: edit contact links array in `CONTACTS` section
+- Update email copy behavior: `copyText(...)` and email card block
+- Update footer time/name: footer section at end of `page.tsx`
 
-## Deploy on Vercel
+## Animation Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Framer Motion handles element reveals, hover states, and keyframe loops.
+- GSAP ScrollTrigger animates workflow vertical line progress and item entrances.
+- If adjusting animation intensity, start with:
+	- `sectionReveal` config
+	- `whileHover` values per section
+	- GSAP trigger `start/end` points
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Metadata
+
+Page metadata is configured in `app/layout.tsx`:
+
+- Title: `Tiara Eshwara | Portfolio`
+- Description: portfolio summary for SEO/social previews
+
+## Deployment
+
+Recommended deployment targets:
+
+- Vercel (best fit for Next.js)
+- Netlify (with Next.js adapter)
+- Any Node-compatible hosting platform
+
+Build command:
+
+```bash
+npm run build
+```
+
+## Author
+
+Tiara Eshwara
+
