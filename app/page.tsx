@@ -191,7 +191,7 @@ const CertificationsSection = ({ isDarkMode }) => {
     <section
       id="EXPERIENCE"
       ref={sectionRef}
-      className="relative z-10 py-32 max-w-[98rem] mx-auto px-4 md:px-8 lg:px-10 overflow-hidden"
+      className={`relative z-10 py-32 max-w-[98rem] mx-auto px-4 md:px-8 lg:px-10 overflow-hidden border-b ${isDarkMode ? "border-white/10" : "border-black/10"}`}
     >
       <div className="flex flex-col md:flex-row gap-12">
         {/* Left Side: Title */}
@@ -523,7 +523,7 @@ const LanguageFluency = ({ isDarkMode }) => {
 
   return (
     <section
-      className="relative z-10 max-w-[94rem] mx-auto px-4 md:px-8 lg:px-10 py-24 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24"
+      className={`relative z-10 max-w-[94rem] mx-auto px-4 md:px-8 lg:px-10 py-24 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 border-b ${isDarkMode ? "border-white/10" : "border-black/10"}`}
       onMouseEnter={() => setIsLangSectionHovered(true)}
       onMouseLeave={() => {
         setIsLangSectionHovered(false);
@@ -926,7 +926,7 @@ export default function PortfolioPage() {
             scale: heroScale,
             filter: heroBlur,
           }}
-          className="relative z-10 flex flex-col md:flex-row items-center justify-between pt-8 md:pt-14 px-4 md:px-8 lg:px-10 max-w-[99rem] mx-auto pb-1 md:pb-2 origin-top"
+          className={`relative z-10 flex flex-col md:flex-row items-center justify-between pt-8 md:pt-14 px-4 md:px-8 lg:px-10 max-w-[99rem] mx-auto pb-1 md:pb-2 origin-top border-b ${isDarkMode ? "border-white/10" : "border-black/10"}`}
         >
           <div className="w-full md:w-[60%] mb-5 md:mb-0">
             <motion.div
@@ -1009,10 +1009,10 @@ export default function PortfolioPage() {
               >
                 Driven by a passion for building seamless, end-to-end digital
                 experiences, I pair a rigorous engineering mindset with a
-                diverse toolkit spanning Web, Mobile, and Data Science. I am
-                eager to transition my technical foundation into a professional
-                environment—applying my drive for excellence to real-world
-                software challenges and high-velocity engineering teams.{" "}
+                diverse toolkit spanning Web, Mobile. I am eager to transition
+                my technical foundation into a professional environment—applying
+                my drive for excellence to real-world software challenges and
+                high-velocity engineering teams.{" "}
               </p>
             </div>
           </div>
@@ -1045,7 +1045,7 @@ export default function PortfolioPage() {
         {/* PILL CATEGORIES */}
         <motion.section
           id="DEVELOPMENTS"
-          className="relative z-10 -mt-14 md:-mt-20 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 py-3 flex flex-wrap gap-4"
+          className={`relative z-10 -mt-14 md:-mt-20 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 py-3 flex flex-wrap gap-4 border-b ${isDarkMode ? "border-white/10" : "border-black/10"}`}
           {...sectionReveal}
         >
           {[
@@ -1074,7 +1074,7 @@ export default function PortfolioPage() {
 
         {/* WORKFLOW SECTION */}
         <motion.section
-          className="relative z-10 py-16 md:py-20 max-w-[96rem] mx-auto px-4 md:px-8 lg:px-10 process-container"
+          className={`relative z-10 py-16 md:py-20 max-w-[96rem] mx-auto px-4 md:px-8 lg:px-10 process-container border-b ${isDarkMode ? "border-white/10" : "border-black/10"}`}
           {...sectionReveal}
         >
           <div className="text-center mb-14 md:mb-16">
@@ -1180,7 +1180,7 @@ export default function PortfolioPage() {
         {/* SKILLS SECTION */}
         <motion.section
           id="SKILLS"
-          className="relative z-10 py-12 md:py-16 max-w-[92rem] mx-auto px-4 md:px-8 lg:px-10"
+          className={`relative z-10 py-12 md:py-16 max-w-[92rem] mx-auto px-4 md:px-8 lg:px-10 border-b ${isDarkMode ? "border-white/10" : "border-black/10"}`}
           {...sectionReveal}
         >
           <h2 className="text-center text-purple-400 text-[10px] font-black uppercase tracking-[0.5em] mb-10">
@@ -1261,7 +1261,7 @@ export default function PortfolioPage() {
         {/* CONTACT SECTION */}
         <motion.section
           id="CONTACTS"
-          className={`relative z-10 py-16 md:py-20 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
+          className={`relative z-10 py-16 md:py-20 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 border-y ${isDarkMode ? "border-white/10" : "border-black/10"}`}
           {...sectionReveal}
         >
           <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.5em] mb-9">
@@ -1403,7 +1403,7 @@ export default function PortfolioPage() {
         {/* EXPERIENCE SECTION */}
         <motion.section
           id="EXPERIENCE_CARDS"
-          className={`relative z-10 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-6 pb-32 pt-20 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
+          className={`relative z-10 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-6 pb-32 pt-20 border-y ${isDarkMode ? "border-white/10" : "border-black/10"}`}
           {...sectionReveal}
         >
           <motion.div
@@ -1479,7 +1479,7 @@ export default function PortfolioPage() {
         </motion.section>
 
         <motion.section
-          className={`relative z-10 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 pb-10 md:pb-12 border-t ${isDarkMode ? "border-white/5" : "border-black/5"}`}
+          className={`relative z-10 max-w-[99rem] mx-auto px-4 md:px-8 lg:px-10 pb-10 md:pb-12 border-y ${isDarkMode ? "border-white/10" : "border-black/10"}`}
           {...sectionReveal}
         >
           <div
@@ -1491,7 +1491,7 @@ export default function PortfolioPage() {
               <p className="text-[9px] uppercase font-black tracking-[0.24em] text-gray-500 mb-1.5">
                 Local Time
               </p>
-              <p className="text-xl md:text-2xl font-extrabold tracking-tight leading-none">
+              <p className="text-base md:text-[1.35rem] font-black uppercase tracking-[0.06em] leading-none">
                 {systemZone} - {systemTime || "--:--"}
               </p>
             </div>
