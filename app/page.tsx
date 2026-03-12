@@ -1137,29 +1137,63 @@ export default function PortfolioPage() {
           </h2>
           <div className="space-y-10">
             {skills.map((skill, index) => (
-              <div key={index}>
+              <motion.div
+                key={index}
+                initial="rest"
+                whileHover="hover"
+                animate="rest"
+                variants={{
+                  rest: { y: 0, scale: 1 },
+                  hover: {
+                    y: -6,
+                    scale: 1.008,
+                    transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
+                  },
+                }}
+                className="group"
+              >
                 <div className="flex justify-between items-center mb-3">
                   <span
-                    className={`text-xs font-black uppercase tracking-widest ${isDarkMode ? "text-white" : "text-black"}`}
+                    className={`text-xs font-black uppercase tracking-widest transition-all duration-300 group-hover:text-purple-300 group-hover:tracking-[0.16em] ${isDarkMode ? "text-white" : "text-black group-hover:text-purple-600"}`}
                   >
                     {skill.name}
                   </span>
-                  <span className="text-purple-400 text-[10px] font-mono">
+                  <span className="text-purple-400 text-[10px] font-mono transition-transform duration-300 group-hover:scale-110">
                     {skill.level}%
                   </span>
                 </div>
                 <div
-                  className={`h-[6px] w-full rounded-full overflow-hidden ${isDarkMode ? "bg-white/5" : "bg-black/5"}`}
+                  className={`relative h-[6px] w-full rounded-full overflow-hidden ${isDarkMode ? "bg-white/5" : "bg-black/5"}`}
                 >
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
                     transition={{ duration: 1.5, ease: "circOut" }}
                     viewport={{ once: true }}
-                    className="h-full bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 shadow-[0_0_15px_rgba(147,51,234,0.4)]"
+                    variants={{
+                      rest: { scaleY: 1 },
+                      hover: {
+                        scaleY: 1.35,
+                        boxShadow: "0 0 22px rgba(168,85,247,0.65)",
+                        transition: { duration: 0.28, ease: "easeOut" },
+                      },
+                    }}
+                    className="relative h-full origin-center bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 shadow-[0_0_15px_rgba(147,51,234,0.4)]"
+                  />
+                  <motion.div
+                    aria-hidden
+                    variants={{
+                      rest: { x: "-130%", opacity: 0 },
+                      hover: {
+                        x: "250%",
+                        opacity: [0, 0.75, 0],
+                        transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+                      },
+                    }}
+                    className="absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-white/65 to-transparent blur-[2px] pointer-events-none"
                   />
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.section>
