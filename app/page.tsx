@@ -14,8 +14,23 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+type ThemeProps = {
+  isDarkMode: boolean;
+};
+
+type NavbarProps = ThemeProps & {
+  toggleTheme: () => void;
+};
+
+type Language = {
+  name: string;
+  value: number;
+  color: string;
+  radius: number;
+};
+
 // --- NEW CERTIFICATIONS COMPONENT ---
-const CertificationsSection = ({ isDarkMode }) => {
+const CertificationsSection = ({ isDarkMode }: ThemeProps) => {
   const sectionRef = useRef(null);
   const scrollbarRef = useRef<HTMLDivElement | null>(null);
   const interactionTimeoutRef = useRef<number | null>(null);
@@ -358,7 +373,7 @@ const CertificationsSection = ({ isDarkMode }) => {
 };
 
 // --- NAVBAR COMPONENT ---
-const Navbar = ({ isDarkMode, toggleTheme }) => {
+const Navbar = ({ isDarkMode, toggleTheme }: NavbarProps) => {
   const navLinks = [
     { name: "DEVELOPMENTS", href: "#DEVELOPMENTS" },
     { name: "SKILLS", href: "#SKILLS" },
@@ -493,14 +508,14 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
 };
 
 // --- LANGUAGE FLUENCY COMPONENT ---
-const LanguageFluency = ({ isDarkMode }) => {
-  const languages = [
+const LanguageFluency = ({ isDarkMode }: ThemeProps) => {
+  const languages: Language[] = [
     { name: "Sinhala", value: 98, color: "#9333ea", radius: 80 },
     { name: "English", value: 50, color: "#d946ef", radius: 60 },
     { name: "Japanese", value: 40, color: "#6366f1", radius: 40 },
   ];
 
-  const [hovered, setHovered] = useState(null);
+  const [hovered, setHovered] = useState<Language | null>(null);
   const [isLangSectionHovered, setIsLangSectionHovered] = useState(false);
   const [cycleIndex, setCycleIndex] = useState(0);
 
@@ -719,7 +734,7 @@ export default function PortfolioPage() {
       },
     );
 
-    const items = gsap.utils.toArray(".process-item");
+    const items = gsap.utils.toArray<HTMLElement>(".process-item");
     items.forEach((item) => {
       gsap.fromTo(
         item,
