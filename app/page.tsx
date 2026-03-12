@@ -1419,15 +1419,15 @@ export default function PortfolioPage() {
             <p
               className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}
             >
-              Lead Designer
+              Web Developer
             </p>
             <p className="text-gray-500 text-xs italic mb-4">2023 - Present</p>
             <p
               className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}
             >
-              UI/UX Intern
+              Mobile Developer
             </p>
-            <p className="text-gray-500 text-xs italic">2022 - 2023</p>
+            <p className="text-gray-500 text-xs italic">2023 - Present</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1453,12 +1453,27 @@ export default function PortfolioPage() {
             transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: false, amount: 0.4 }}
             whileHover={{ y: -8, scale: 1.015 }}
-            className={`border p-8 rounded-3xl flex items-end transition-all ${isDarkMode ? "bg-white/[0.03] border-white/5 hover:shadow-[0_16px_55px_rgba(168,85,247,0.16)]" : "bg-black/[0.03] border-black/5 hover:shadow-[0_16px_55px_rgba(76,29,149,0.12)]"}`}
+            className={`border p-8 rounded-3xl transition-all ${isDarkMode ? "bg-white/[0.03] border-white/5 hover:shadow-[0_16px_55px_rgba(168,85,247,0.16)]" : "bg-black/[0.03] border-black/5 hover:shadow-[0_16px_55px_rgba(76,29,149,0.12)]"}`}
           >
-            <p className="text-gray-500 text-[10px] uppercase tracking-widest leading-relaxed">
-              Engineering refined digital systems with a focus on logic and
-              human intuition.
+            <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-8">
+              Extra Experience
+            </h3>
+            <p
+              className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}
+            >
+              Faculty Coordinator
             </p>
+            <p className="text-gray-500 text-xs mb-1">NSBM Karate Club</p>
+            <p className="text-gray-500 text-xs italic mb-5">
+              Apr 2025 - Present
+            </p>
+            <p
+              className={`text-base font-bold ${isDarkMode ? "text-white" : "text-black"}`}
+            >
+              Executive Board Member
+            </p>
+            <p className="text-gray-500 text-xs mb-1">NSBM Volunteer Club</p>
+            <p className="text-gray-500 text-xs italic">Mar 2025 - Feb 2026</p>
           </motion.div>
         </motion.section>
 
